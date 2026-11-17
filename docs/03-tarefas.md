@@ -20,7 +20,7 @@
 
 ## Configuração
 
-### [ ] T01 — Renomear o pacote
+### [x] T01 — Renomear o pacote
 - **Descrição:** trocar `com.example.keveoq` por `com.radierdev.keveoq` em `namespace`, `applicationId`, pastas de código e declarações `package`/`import`.
 - **Pronto quando:** não há mais nenhuma ocorrência de `com.example` no projeto, e o app compila e abre no emulador.
 - **Relacionado:** RNF02, RNF11 · Seção 1

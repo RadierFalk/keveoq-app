@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.keveoq"
+    namespace = "com.radierdev.keveoq"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.keveoq"
+        applicationId = "com.radierdev.keveoq"
         minSdk = 24
         targetSdk = 37
         versionCode = 1

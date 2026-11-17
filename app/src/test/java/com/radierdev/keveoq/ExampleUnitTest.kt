@@ -1,4 +1,4 @@
-package com.example.keveoq
+package com.radierdev.keveoq
 
 import org.junit.Test
 

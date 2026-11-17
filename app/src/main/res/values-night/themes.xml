@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Variante do modo escuro: evita a janela branca ao abrir o app no tema escuro. -->
+    <style name="Theme.KeveOQ" parent="android:Theme.Material.NoActionBar" />
+</resources>

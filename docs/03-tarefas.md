@@ -32,7 +32,7 @@
 - **Relacionado:** RNF03, RNF04 · Seções 1, 3.2, 4
 - **Commit:** `chore: configura dependencias e build do projeto`
 
-### [ ] T03 — Aplicar o tema da identidade visual
+### [x] T03 — Aplicar o tema da identidade visual
 - **Descrição:** criar `Color.kt`, `Type.kt` e `Theme.kt` em `presentation/theme/` com o código de `docs/identidade-visual.md`; criar `Dimens`; remover `ui/theme/` e `colors.xml`; tema da janela com variante noturna (`values-night/themes.xml`); `app_name` = "KeveOQ"; `MainActivity` usando `KeveOQTheme`.
 - **Pronto quando:** o app abre com as cores e fontes da identidade nos temas claro e escuro, sem "flash" branco no escuro; não existe cor dinâmica.
 - **Relacionado:** RNF07, RNF12 · Seções 1, 9.3

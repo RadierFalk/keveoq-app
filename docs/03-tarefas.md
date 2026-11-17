@@ -26,7 +26,7 @@
 - **Relacionado:** RNF02, RNF11 · Seção 1
 - **Commit:** `chore: renomeia pacote para com.radierdev.keveoq`
 
-### [ ] T02 — Configurar build, dependências e README inicial
+### [x] T02 — Configurar build, dependências e README inicial
 - **Descrição:** atualizar `gradle/libs.versions.toml` com as versões da seção 4; aplicar os plugins `kotlin.serialization` e `ksp`; `minSdk` 26; ligar `buildConfig` e criar `BuildConfig.TMDB_API_KEY` a partir de `local.properties`; remover `ExampleUnitTest`, `ExampleInstrumentedTest`, `androidTest`, Espresso e dependências de teste de UI. Criar o `README.md` com nome, descrição e a seção de configuração (como obter o token do TMDB e onde colocá-lo).
 - **Pronto quando:** `./gradlew assembleDebug` passa com todas as bibliotecas da stack declaradas; `BuildConfig.TMDB_API_KEY` existe; a chave não aparece em nenhum arquivo versionado.
 - **Relacionado:** RNF03, RNF04 · Seções 1, 3.2, 4

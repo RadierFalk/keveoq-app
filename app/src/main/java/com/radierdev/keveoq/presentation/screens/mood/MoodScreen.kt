@@ -1,9 +1,12 @@
 package com.radierdev.keveoq.presentation.screens.mood
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -26,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -75,7 +79,20 @@ fun MoodScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.app_name)) },
+                title = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        // Decorativo: o nome do app ao lado já é lido pelo leitor de tela.
+                        Image(
+                            painter = painterResource(R.drawable.ic_keveoq_logo),
+                            contentDescription = null,
+                            modifier = Modifier.size(Dimens.LogoSize),
+                        )
+                        Text(stringResource(R.string.app_name))
+                    }
+                },
                 actions = {
                     IconButton(onClick = onOpenWatchlist) {
                         Icon(

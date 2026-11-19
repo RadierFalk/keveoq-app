@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo do KeveOQ para uso dentro do app (barra da tela inicial).
+     Convertido de icone/keveoq-icone-circular.svg: o painterResource do Compose não lê
+     o ícone adaptativo (mipmap), então o logo circular tem seu próprio vector drawable.
+     Cores de marca (KeveOQBrand): permitidas aqui por ser ilustração/ícone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Fundo circular (brand-abobora) -->
+    <path
+        android:fillColor="#FFE8661E"
+        android:pathData="M0,60a60,60 0 1,0 120,0a60,60 0 1,0 -120,0Z" />
+    <path
+        android:fillColor="#FFEBC789"
+        android:pathData="M24,50a20,20 0 1,0 40,0a20,20 0 1,0 -40,0ZM40,40a22,22 0 1,0 44,0a22,22 0 1,0 -44,0ZM62,52a19,19 0 1,0 38,0a19,19 0 1,0 -38,0ZM30,70a20,20 0 1,0 40,0a20,20 0 1,0 -40,0ZM55,70a19,19 0 1,0 38,0a19,19 0 1,0 -38,0ZM20,64a14,14 0 1,0 28,0a14,14 0 1,0 -28,0ZM38,78L30,100L58,84Z" />
+    <path
+        android:fillColor="#FFFFF1CF"
+        android:pathData="M25.5,47.5a17,17 0 1,0 34,0a17,17 0 1,0 -34,0ZM41.5,37.5a19,19 0 1,0 38,0a19,19 0 1,0 -38,0ZM63.5,49.5a16,16 0 1,0 32,0a16,16 0 1,0 -32,0ZM31.5,67.5a17,17 0 1,0 34,0a17,17 0 1,0 -34,0ZM56.5,67.5a16,16 0 1,0 32,0a16,16 0 1,0 -32,0ZM21.5,61.5a11,11 0 1,0 22,0a11,11 0 1,0 -22,0ZM48,60a14,14 0 1,0 28,0a14,14 0 1,0 -28,0ZM40,79L33,95L54,84Z" />
+    <path
+        android:fillAlpha="0.85"
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M50.6,29a2.4,2.4 0 1,0 4.8,0a2.4,2.4 0 1,0 -4.8,0ZM72,42a2,2 0 1,0 4,0a2,2 0 1,0 -4,0ZM34,42a2,2 0 1,0 4,0a2,2 0 1,0 -4,0ZM25.4,58a1.6,1.6 0 1,0 3.2,0a1.6,1.6 0 1,0 -3.2,0Z" />
+    <path
+        android:fillColor="#FF2B1C14"
+        android:pathData="M49,54a4,4 0 1,0 8,0a4,4 0 1,0 -8,0ZM67,54a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z" />
+    <path
+        android:pathData="M51,64Q62,74 73,64"
+        android:strokeWidth="5"
+        android:strokeColor="#FF2B1C14"
+        android:strokeLineCap="round" />
+</vector>

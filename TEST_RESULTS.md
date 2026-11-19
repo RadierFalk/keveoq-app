@@ -7,6 +7,45 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:17 — T14: caso de uso do atraso da notificação (domain completo)
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 94 |
+| Aprovados | 94 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `CalculateNotificationDelayUseCaseTest` | 4 | Relógio fixo no fuso de São Paulo: 14h (5 h), 20h (imediato), 22h (21 h); horário local do fuso, e não UTC (RN10, CA29) |
+
+**Resumo do domain após esta execução:**
+
+| Classe de teste | Testes |
+|---|---|
+| `MoodCriteriaMapperTest` | 14 |
+| `RecommendationRulesTest` | 6 |
+| `CachePolicyTest` | 6 |
+| `TrailerSelectorTest` | 8 |
+| `RatingRulesTest` | 5 |
+| `NotificationWindowTest` | 8 |
+| `GetMoodsUseCaseTest` | 1 |
+| `ObserveRecommendationsUseCaseTest` | 5 |
+| `RefreshRecommendationsUseCaseTest` | 9 |
+| `ObserveConnectivityUseCaseTest` | 1 |
+| `ObserveMovieDetailsUseCaseTest` | 1 |
+| `RefreshMovieDetailsUseCaseTest` | 9 |
+| `WatchlistUseCasesTest` | 17 |
+| `CalculateNotificationDelayUseCaseTest` | 4 |
+| **Total** | **94** |
+
+---
+
 ## 2026-11-19 14:16 — T13: casos de uso da lista "Quero assistir"
 
 | Item | Valor |

@@ -100,7 +100,7 @@
 - **Relacionado:** RF08–RF11, RN06–RN08 · CA20–CA24
 - **Commit:** `feat: cria casos de uso da lista quero assistir`
 
-### [ ] T14 — Caso de uso do agendamento da notificação
+### [x] T14 — Caso de uso do agendamento da notificação
 - **Descrição:** `CalculateNotificationDelayUseCase` usando `NotificationWindow` e o `Clock` injetado.
 - **Pronto quando:** testes com relógio fixo passam.
 - **Relacionado:** RF17, RN10 · CA29

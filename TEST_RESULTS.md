@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:11 — T10: janela da notificação
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 47 |
+| Aprovados | 47 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `NotificationWindowTest` | 8 | 14h (5 h), 19h e 20h59 (imediato), 21h e 22h (dia seguinte), meia-noite, virada de mês e de ano (RN10, CA29) |
+
+As demais classes (`MoodCriteriaMapperTest`, `RecommendationRulesTest`, `CachePolicyTest`, `TrailerSelectorTest`, `RatingRulesTest`) foram executadas novamente, sem falhas.
+
+---
+
 ## 2026-11-19 14:03 — T09: seleção de trailer e validação de nota
 
 | Item | Valor |

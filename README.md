@@ -59,4 +59,5 @@ Cobertura atual:
 - regras de recomendação: mínimo de votos, remoção de filmes assistidos e de duplicados, mantendo a ordem;
 - validade de 24 horas do cache de recomendações, testada com relógio fixo;
 - seleção do trailer (somente YouTube do tipo "Trailer", com prioridade ao oficial);
-- validação da avaliação pessoal (1 a 5 estrelas).
+- validação da avaliação pessoal (1 a 5 estrelas);
+- cálculo do atraso até a próxima janela da notificação (19h às 21h), incluindo viradas de mês e de ano.

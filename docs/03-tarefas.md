@@ -76,7 +76,7 @@
 - **Relacionado:** RN08, RN09 · CA15, CA17, CA24
 - **Commit:** `feat: implementa selecao de trailer e validacao de nota`
 
-### [ ] T10 — Janela da notificação
+### [x] T10 — Janela da notificação
 - **Descrição:** `NotificationWindow`: atraso até a próxima janela 19h–21h.
 - **Pronto quando:** testes passam para 14h, 19h, 20h59, 21h, 22h e virada de mês.
 - **Relacionado:** RN10 · CA29

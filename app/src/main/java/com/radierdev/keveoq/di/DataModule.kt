@@ -5,6 +5,10 @@ import com.radierdev.keveoq.BuildConfig
 import com.radierdev.keveoq.data.local.AppDatabase
 import com.radierdev.keveoq.data.remote.AuthInterceptor
 import com.radierdev.keveoq.data.remote.TmdbApi
+import com.radierdev.keveoq.data.repository.MovieRepositoryImpl
+import com.radierdev.keveoq.data.repository.SavedMovieRepositoryImpl
+import com.radierdev.keveoq.domain.repository.MovieRepository
+import com.radierdev.keveoq.domain.repository.SavedMovieRepository
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -61,4 +65,13 @@ val dataModule = module {
     }
     single { get<AppDatabase>().movieDao() }
     single { get<AppDatabase>().savedMovieDao() }
+
+    // Repositórios: registrados pela interface do domain, para que quem
+    // pede um MovieRepository não saiba que existe Room ou Retrofit por trás.
+    single<MovieRepository> {
+        MovieRepositoryImpl(api = get(), movieDao = get(), clock = get(), dispatchers = get())
+    }
+    single<SavedMovieRepository> {
+        SavedMovieRepositoryImpl(savedMovieDao = get(), dispatchers = get())
+    }
 }

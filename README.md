@@ -66,4 +66,6 @@ Cobertura atual:
 - casos de uso da lista "Quero assistir": adicionar sem duplicar, marcar como assistido, avaliar (só assistidos, de 1 a 5) e filtrar por status;
 - cliente da API do TMDB: conversão de cada tipo de falha de rede em erro do app, leitura do JSON da API, conversão para os modelos do app e envio do token apenas no cabeçalho;
 - banco local: gravação dos gêneros como JSON e conversão entre as tabelas e os modelos do app;
-- repositório de filmes, com API e banco falsos: busca das páginas 1 e 2, cache válido e expirado, falha de rede com e sem cache (o cache nunca é apagado por uma falha) e gravação dos detalhes.
+- repositório de filmes, com API e banco falsos: busca das páginas 1 e 2, cache válido e expirado, falha de rede com e sem cache (o cache nunca é apagado por uma falha) e gravação dos detalhes;
+- repositório da lista "Quero assistir": salvar sem duplicar, marcar como assistido, avaliar e tratar falhas do banco sem encerrar o app;
+- injeção de dependências: o Koin consegue construir todos os casos de uso.

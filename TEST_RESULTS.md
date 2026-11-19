@@ -7,6 +7,35 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:40 — T18: repositório da lista "Quero assistir" e injeção de dependências (camada Data completa)
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 168 |
+| Aprovados | 168 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `SavedMovieRepositoryImplTest` | 9 | Salvar e ler; filme não salvo; duplicado vira falha sem exceção (RN06); marcar como assistido; gravar e trocar a nota (CA24); ordem da lista; IDs assistidos em tempo real; falha do banco em cada escrita |
+| `DomainModuleTest` | 1 | O Koin constrói os 12 casos de uso do `domainModule` |
+
+**Resumo por camada após esta execução:**
+
+| Camada | Classes de teste | Testes |
+|---|---|---|
+| Domain (regras e casos de uso) | 14 | 101 |
+| Data (API, banco, mappers, repositórios) | 9 | 66 |
+| DI (Koin) | 1 | 1 |
+| **Total** | **24** | **168** |
+
+---
+
 ## 2026-11-19 14:39 — T17: repositório de filmes
 
 | Item | Valor |

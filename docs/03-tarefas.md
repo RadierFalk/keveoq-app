@@ -126,7 +126,7 @@
 - **Relacionado:** RF04, RF07, RF14, RF15, RN11 · CA09, CA10, CA33
 - **Commit:** `feat: implementa repositorio de filmes`
 
-### [ ] T18 — Repositório da lista salva
+### [x] T18 — Repositório da lista salva
 - **Descrição:** `SavedMovieRepositoryImpl`; registrar repositórios e casos de uso nos módulos Koin.
 - **Pronto quando:** testes com DAO falso cobrem salvar, marcar como assistido, avaliar, observar por status e IDs assistidos.
 - **Relacionado:** RF08–RF11, RNF05 · CA20–CA25

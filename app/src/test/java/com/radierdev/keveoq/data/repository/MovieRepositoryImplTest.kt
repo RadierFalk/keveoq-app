@@ -209,6 +209,16 @@ class MovieRepositoryImplTest {
     }
 
     @Test
+    fun `detalhes devem pedir onde assistir e datas de lancamento na mesma requisicao`() = runRepoTest {
+        api.detailsResponse = MovieDetailsDto(id = 10, title = "Filme")
+
+        repository().fetchMovieDetails(10)
+
+        assertEquals("release_dates,watch/providers", api.lastAppendToResponse)
+        assertEquals(1, api.detailsCalls)
+    }
+
+    @Test
     fun `erro 404 nos detalhes deve virar erro http`() = runRepoTest {
         api.detailsError = HttpException(Response.error<Any>(404, "".toResponseBody(null)))
 

@@ -7,6 +7,32 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:53 — T26C: dados e regras de "onde assistir"
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 259 |
+| Aprovados | 259 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas e ampliadas:**
+
+| Classe de teste | Novos | Cobre |
+|---|---|---|
+| `TheatricalRuleTest` | 7 | Dia da estreia, 10, 42, 43 e 60 dias depois, antes da estreia e sem data (RN14, CA40) |
+| `WatchProvidersMapperTest` | 11 | Grupos assinatura/aluguel/compra só do Brasil, grupo vazio, ordem por prioridade sem repetidos, URL do logo e serviço sem logo (RN13, CA38); estreia nos cinemas do Brasil, tipos 2 e 3, data mais antiga, digital e outro país ignorados, data inválida |
+| `TmdbJsonParsingTest` | +2 | JSON com `release_dates` e `watch/providers` do `append_to_response`; detalhes sem esses campos |
+| `ConvertersTest` | +2 | "Onde assistir" vai e volta do JSON; `{}` (padrão da migração) lido como nenhum serviço |
+| `MovieRepositoryImplTest` | +1 | Detalhes pedem `release_dates,watch/providers` numa única requisição |
+| `LocalMappersTest` | (ampliado) | Detalhes com serviços e estreia vão e voltam do banco sem perda |
+
+**Pendente:** verificação no aparelho de que a migração 1 → 2 preserva a lista "Quero assistir" (o aparelho estava desconectado nesta execução). O Room validou o esquema na compilação (KSP), mas a migração em si só roda no Android.
+
+---
+
 ## 2026-11-19 15:44 — T26B: botão "Me surpreenda"
 
 | Item | Valor |

@@ -13,8 +13,9 @@ import com.radierdev.keveoq.data.local.entity.SavedMovieEntity
 /**
  * Banco local `keveoq.db`, a única fonte de verdade do app (seção 5 do planejamento).
  *
- * `exportSchema = false`: o banco nasce na versão 1 e não há migrações;
- * se o esquema mudar durante o desenvolvimento, usa-se migração destrutiva.
+ * Versão 2: colunas de "onde assistir" em `movie_details` (ver [MIGRATION_1_2]).
+ * `exportSchema = false`: o esquema não é exportado em arquivo. A migração
+ * destrutiva continua configurada só como rede de segurança, para versões sem migração.
  */
 @Database(
     entities = [
@@ -23,7 +24,7 @@ import com.radierdev.keveoq.data.local.entity.SavedMovieEntity
         MovieDetailsEntity::class,
         SavedMovieEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 @TypeConverters(Converters::class)

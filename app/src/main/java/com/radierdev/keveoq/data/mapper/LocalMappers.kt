@@ -11,7 +11,12 @@ import com.radierdev.keveoq.domain.model.Movie
 import com.radierdev.keveoq.domain.model.MovieDetails
 import com.radierdev.keveoq.domain.model.Recommendations
 import com.radierdev.keveoq.domain.model.SavedMovie
+import com.radierdev.keveoq.data.local.entity.StoredProvider
+import com.radierdev.keveoq.data.local.entity.StoredWatchProviders
+import com.radierdev.keveoq.domain.model.WatchProvider
+import com.radierdev.keveoq.domain.model.WatchProviders
 import java.time.Instant
+import java.time.LocalDate
 
 // Conversões entre as entidades do Room e os modelos de domínio.
 // Datas são gravadas como epoch em milissegundos (Long) e viram Instant no domínio.
@@ -69,6 +74,8 @@ fun MovieDetailsEntity.toDomain(): MovieDetails = MovieDetails(
     genres = genres,
     trailerKey = trailerKey,
     updatedAt = Instant.ofEpochMilli(updatedAt),
+    watchProviders = watchProviders.toDomain(),
+    theatricalReleaseBr = theatricalReleaseBr?.let(LocalDate::ofEpochDay),
 )
 
 fun MovieDetails.toEntity(): MovieDetailsEntity = MovieDetailsEntity(
@@ -82,7 +89,27 @@ fun MovieDetails.toEntity(): MovieDetailsEntity = MovieDetailsEntity(
     genres = genres,
     trailerKey = trailerKey,
     updatedAt = updatedAt.toEpochMilli(),
+    watchProviders = watchProviders.toStored(),
+    theatricalReleaseBr = theatricalReleaseBr?.toEpochDay(),
 )
+
+fun StoredWatchProviders.toDomain(): WatchProviders = WatchProviders(
+    subscription = subscription.map { it.toDomain() },
+    rent = rent.map { it.toDomain() },
+    buy = buy.map { it.toDomain() },
+    link = link,
+)
+
+fun WatchProviders.toStored(): StoredWatchProviders = StoredWatchProviders(
+    subscription = subscription.map { it.toStored() },
+    rent = rent.map { it.toStored() },
+    buy = buy.map { it.toStored() },
+    link = link,
+)
+
+private fun StoredProvider.toDomain() = WatchProvider(id = id, name = name, logoUrl = logoUrl)
+
+private fun WatchProvider.toStored() = StoredProvider(id = id, name = name, logoUrl = logoUrl)
 
 fun SavedMovieEntity.toDomain(): SavedMovie = SavedMovie(
     movieId = movieId,

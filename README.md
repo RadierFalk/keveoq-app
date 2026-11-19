@@ -91,4 +91,5 @@ Cobertura atual:
 - tela "Sobre": versão e texto exato de atribuição ao TMDB;
 - agendamento da notificação: intervalo de 4 dias, primeira execução na janela das 19h às 21h e política que evita agendamentos duplicados;
 - sorteio de filme: humor aleatório, sem filmes assistidos, funcionamento offline com cache e aviso quando não há filme para sortear;
-- botão "Me surpreenda": abre o filme sorteado, avisa quando não há filme e ignora toques repetidos durante o sorteio.
+- botão "Me surpreenda": abre o filme sorteado, avisa quando não há filme e ignora toques repetidos durante o sorteio;
+- onde assistir: leitura dos serviços do Brasil (assinatura, aluguel e compra) e da estreia nos cinemas, regra de "em cartaz" (até 42 dias após a estreia) e gravação no banco.

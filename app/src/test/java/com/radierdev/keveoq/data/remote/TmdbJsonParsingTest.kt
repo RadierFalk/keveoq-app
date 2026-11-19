@@ -55,6 +55,38 @@ class TmdbJsonParsingTest {
     }
 
     @Test
+    fun `deve ler detalhes com release_dates e watch providers do append_to_response`() {
+        val body = """
+            {"id": 10, "title": "Filme",
+             "release_dates": {"results": [
+               {"iso_3166_1": "BR", "release_dates": [
+                 {"type": 3, "release_date": "2024-06-20T00:00:00.000Z", "certification": "L", "note": ""}
+               ]}
+             ]},
+             "watch/providers": {"results": {
+               "BR": {"link": "https://www.themoviedb.org/movie/10/watch?locale=BR",
+                      "flatrate": [{"provider_id": 337, "provider_name": "Disney Plus",
+                                    "logo_path": "/disney.jpg", "display_priority": 1}]},
+               "US": {"rent": [{"provider_id": 2, "provider_name": "Apple TV", "logo_path": "/a.jpg"}]}
+             }}}
+        """.trimIndent()
+
+        val details = json.decodeFromString<MovieDetailsDto>(body)
+
+        assertEquals(3, details.releaseDates?.results?.single()?.releaseDates?.single()?.type)
+        assertEquals("Disney Plus", details.watchProviders?.results?.get("BR")?.flatrate?.single()?.providerName)
+        assertEquals(2, details.watchProviders?.results?.size)
+    }
+
+    @Test
+    fun `detalhes sem append_to_response devem ser lidos sem onde assistir`() {
+        val details = json.decodeFromString<MovieDetailsDto>("""{"id": 10, "title": "Filme"}""")
+
+        assertNull(details.releaseDates)
+        assertNull(details.watchProviders)
+    }
+
+    @Test
     fun `deve ler a lista de videos`() {
         val body = """
             {"id": 10, "results": [

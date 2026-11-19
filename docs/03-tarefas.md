@@ -200,7 +200,7 @@
 
 ## Onde assistir (acrescentado após a T26B)
 
-### [ ] T26C — Dados e regras de "onde assistir"
+### [x] T26C — Dados e regras de "onde assistir"
 - **Descrição:** modelos `WatchProviders` e `WatchProvider`; `TheatricalRule` (RN14); `MovieDetails` com `watchProviders` e `theatricalReleaseBr`; DTOs de `release_dates` e `watch/providers` e `append_to_response` na chamada de detalhes; mappers (Brasil, três grupos, sem repetidos, URL do logo, data de cinema tipos 2 e 3); `movie_details` com as novas colunas, banco na versão 2 e `MIGRATION_1_2`.
 - **Pronto quando:** testes passam para `TheatricalRule` (dia da estreia, 42 dias, 43 dias, antes da estreia, sem data), leitura do JSON com `append_to_response`, mappers (só `BR`, grupos vazios, repetidos, logo, tipo de lançamento) e conversão das novas colunas; a migração preserva a lista "Quero assistir" (verificado no aparelho).
 - **Relacionado:** RF27, RF28, RN13, RN14 · CA38–CA41 · decisão 16

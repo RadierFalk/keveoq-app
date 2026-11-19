@@ -46,7 +46,11 @@ class FakeTmdbApi : TmdbApi {
         return DiscoverResponseDto(page = page, results = discoverPages[page].orEmpty())
     }
 
-    override suspend fun getMovieDetails(movieId: Int, language: String): MovieDetailsDto {
+    var lastAppendToResponse: String? = null
+        private set
+
+    override suspend fun getMovieDetails(movieId: Int, language: String, appendToResponse: String): MovieDetailsDto {
+        lastAppendToResponse = appendToResponse
         detailsCalls++
         detailsError?.let { throw it }
         return checkNotNull(detailsResponse) { "detailsResponse não configurado no teste" }

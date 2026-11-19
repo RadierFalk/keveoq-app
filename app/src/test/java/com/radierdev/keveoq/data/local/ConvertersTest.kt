@@ -1,5 +1,7 @@
 package com.radierdev.keveoq.data.local
 
+import com.radierdev.keveoq.data.local.entity.StoredProvider
+import com.radierdev.keveoq.data.local.entity.StoredWatchProviders
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -20,6 +22,23 @@ class ConvertersTest {
     @Test
     fun `lista vazia deve ir e voltar sem perda`() {
         assertEquals(emptyList<String>(), converters.toStringList(converters.fromStringList(emptyList())))
+    }
+
+    @Test
+    fun `onde assistir deve ir e voltar sem perda`() {
+        val providers = StoredWatchProviders(
+            subscription = listOf(StoredProvider(8, "Netflix", "https://image.tmdb.org/t/p/w92/n.jpg")),
+            rent = listOf(StoredProvider(2, "Apple TV")),
+            link = "https://www.themoviedb.org/movie/1/watch?locale=BR",
+        )
+
+        assertEquals(providers, converters.toWatchProviders(converters.fromWatchProviders(providers)))
+    }
+
+    @Test
+    fun `valor padrao da migracao deve ser lido como nenhum servico`() {
+        // A migração 1 → 2 cria a coluna com DEFAULT '{}'.
+        assertEquals(StoredWatchProviders(), converters.toWatchProviders("{}"))
     }
 
     @Test

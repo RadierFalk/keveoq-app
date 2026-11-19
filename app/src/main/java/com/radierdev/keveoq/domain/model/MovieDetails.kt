@@ -1,6 +1,7 @@
 package com.radierdev.keveoq.domain.model
 
 import java.time.Instant
+import java.time.LocalDate
 
 /**
  * Detalhes completos de um filme.
@@ -19,4 +20,8 @@ data class MovieDetails(
     val genres: List<String>,
     val trailerKey: String?,
     val updatedAt: Instant,
+    /** Onde assistir no Brasil (RN13). */
+    val watchProviders: WatchProviders = WatchProviders.EMPTY,
+    /** Estreia nos cinemas do Brasil, para o selo "Em cartaz" (RN14); `null` se não houver. */
+    val theatricalReleaseBr: LocalDate? = null,
 )

@@ -3,6 +3,7 @@ package com.radierdev.keveoq.di
 import androidx.room.Room
 import com.radierdev.keveoq.BuildConfig
 import com.radierdev.keveoq.data.local.AppDatabase
+import com.radierdev.keveoq.data.local.MIGRATION_1_2
 import com.radierdev.keveoq.data.remote.AuthInterceptor
 import com.radierdev.keveoq.data.remote.TmdbApi
 import com.radierdev.keveoq.data.repository.MovieRepositoryImpl
@@ -59,7 +60,9 @@ val dataModule = module {
 
     single {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, AppDatabase.NAME)
-            // Sem migrações: se o esquema mudar em desenvolvimento, o banco é recriado.
+            // 1 → 2 preserva os dados (lista "Quero assistir" e notas).
+            .addMigrations(MIGRATION_1_2)
+            // Rede de segurança: só é usada se faltar uma migração.
             .fallbackToDestructiveMigration(dropAllTables = true)
             .build()
     }

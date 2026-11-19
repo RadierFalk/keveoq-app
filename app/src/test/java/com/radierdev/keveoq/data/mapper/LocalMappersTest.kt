@@ -6,12 +6,15 @@ import com.radierdev.keveoq.data.remote.dto.MovieDto
 import com.radierdev.keveoq.domain.model.Mood
 import com.radierdev.keveoq.domain.model.MovieDetails
 import com.radierdev.keveoq.domain.model.SavedMovie
+import com.radierdev.keveoq.domain.model.WatchProvider
+import com.radierdev.keveoq.domain.model.WatchProviders
 import com.radierdev.keveoq.domain.model.WatchStatus
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.time.Instant
+import java.time.LocalDate
 
 class LocalMappersTest {
 
@@ -80,6 +83,12 @@ class LocalMappersTest {
             genres = listOf("Ação", "Ficção científica"),
             trailerKey = "abc123",
             updatedAt = instant,
+            watchProviders = WatchProviders(
+                subscription = listOf(WatchProvider(8, "Netflix", "https://image.tmdb.org/t/p/w92/n.jpg")),
+                buy = listOf(WatchProvider(3, "Google Play", null)),
+                link = "https://www.themoviedb.org/movie/10/watch?locale=BR",
+            ),
+            theatricalReleaseBr = LocalDate.of(1999, 3, 31),
         )
 
         assertEquals(details, details.toEntity().toDomain())

@@ -30,10 +30,12 @@ interface TmdbApi {
         @Query("language") language: String = DEFAULT_LANGUAGE,
     ): DiscoverResponseDto
 
+    /** Detalhes + datas de lançamento + onde assistir, numa única requisição. */
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
         @Query("language") language: String = DEFAULT_LANGUAGE,
+        @Query("append_to_response") appendToResponse: String = DETAILS_APPEND,
     ): MovieDetailsDto
 
     @GET("movie/{movie_id}/videos")
@@ -46,5 +48,6 @@ interface TmdbApi {
         const val BASE_URL = "https://api.themoviedb.org/3/"
         const val DEFAULT_LANGUAGE = "pt-BR"
         const val SORT_BY_POPULARITY = "popularity.desc"
+        const val DETAILS_APPEND = "release_dates,watch/providers"
     }
 }

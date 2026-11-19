@@ -214,7 +214,7 @@
 
 ## Validação
 
-### [ ] T27 — README completo
+### [x] T27 — README completo
 - **Descrição:** revisar o `README.md` com todos os itens exigidos pelo `CLAUDE.md`: objetivo, funcionalidades, tecnologias, API e justificativa, arquitetura, Offline First, configuração, execução, testes, evidências, limitações conhecidas e créditos das fontes.
 - **Pronto quando:** todos os itens presentes e descrevendo apenas o que existe.
 - **Relacionado:** RNF11, RNF12

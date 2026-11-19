@@ -1,5 +1,6 @@
 package com.radierdev.keveoq.domain.usecase
 
+import com.radierdev.keveoq.core.result.AppResult
 import com.radierdev.keveoq.domain.model.RateMovieResult
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.repository.SavedMovieRepository
@@ -18,11 +19,16 @@ class RateMovieUseCase(
         if (!RatingRules.isValid(rating)) {
             return RateMovieResult.InvalidRating
         }
-        val saved = savedMovieRepository.getSavedMovie(movieId)
+        val saved = when (val result = savedMovieRepository.getSavedMovie(movieId)) {
+            is AppResult.Success -> result.data
+            is AppResult.Failure -> return RateMovieResult.Failure(result.error)
+        }
         if (saved?.status != WatchStatus.WATCHED) {
             return RateMovieResult.NotWatched
         }
-        savedMovieRepository.updateRating(movieId, rating)
-        return RateMovieResult.Rated
+        return when (val result = savedMovieRepository.updateRating(movieId, rating)) {
+            is AppResult.Success -> RateMovieResult.Rated
+            is AppResult.Failure -> RateMovieResult.Failure(result.error)
+        }
     }
 }

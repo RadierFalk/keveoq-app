@@ -1,5 +1,7 @@
 package com.radierdev.keveoq.domain.fake
 
+import com.radierdev.keveoq.core.result.AppError
+import com.radierdev.keveoq.core.result.AppResult
 import com.radierdev.keveoq.domain.model.SavedMovie
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.repository.SavedMovieRepository
@@ -11,6 +13,12 @@ import kotlinx.coroutines.flow.map
 class FakeSavedMovieRepository : SavedMovieRepository {
 
     private val movies = MutableStateFlow<Map<Int, SavedMovie>>(emptyMap())
+
+    /** Quando preenchido, a leitura pontual (`getSavedMovie`) falha com este erro. */
+    var readFailure: AppError? = null
+
+    /** Quando preenchido, toda escrita falha com este erro e nada é alterado. */
+    var writeFailure: AppError? = null
 
     var saveCalls = 0
         private set
@@ -37,21 +45,30 @@ class FakeSavedMovieRepository : SavedMovieRepository {
             all.values.filter { it.status == WatchStatus.WATCHED }.map { it.movieId }.toSet()
         }
 
-    override suspend fun getSavedMovie(movieId: Int): SavedMovie? = movies.value[movieId]
+    override suspend fun getSavedMovie(movieId: Int): AppResult<SavedMovie?> {
+        readFailure?.let { return AppResult.Failure(it) }
+        return AppResult.Success(movies.value[movieId])
+    }
 
-    override suspend fun save(movie: SavedMovie) {
+    override suspend fun save(movie: SavedMovie): AppResult<Unit> {
         saveCalls++
-        givenSaved(movie)
+        return write { givenSaved(movie) }
     }
 
-    override suspend fun updateStatus(movieId: Int, status: WatchStatus) {
+    override suspend fun updateStatus(movieId: Int, status: WatchStatus): AppResult<Unit> {
         updateStatusCalls++
-        update(movieId) { it.copy(status = status) }
+        return write { update(movieId) { it.copy(status = status) } }
     }
 
-    override suspend fun updateRating(movieId: Int, rating: Int) {
+    override suspend fun updateRating(movieId: Int, rating: Int): AppResult<Unit> {
         updateRatingCalls++
-        update(movieId) { it.copy(rating = rating) }
+        return write { update(movieId) { it.copy(rating = rating) } }
+    }
+
+    private fun write(change: () -> Unit): AppResult<Unit> {
+        writeFailure?.let { return AppResult.Failure(it) }
+        change()
+        return AppResult.Success(Unit)
     }
 
     private fun update(movieId: Int, change: (SavedMovie) -> SavedMovie) {

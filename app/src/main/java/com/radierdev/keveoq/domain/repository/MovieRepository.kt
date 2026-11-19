@@ -40,5 +40,5 @@ interface MovieRepository {
     suspend fun fetchVideos(movieId: Int, language: String): AppResult<List<Video>>
 
     /** Grava (ou substitui) os detalhes de um filme no banco. */
-    suspend fun saveMovieDetails(details: MovieDetails)
+    suspend fun saveMovieDetails(details: MovieDetails): AppResult<Unit>
 }

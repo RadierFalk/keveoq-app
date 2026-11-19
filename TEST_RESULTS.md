@@ -7,6 +7,26 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:21 — Correção: falhas do banco como `AppResult` na lista "Quero assistir"
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 101 |
+| Aprovados | 101 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Refatoração do `SavedMovieRepository` e do `saveMovieDetails` para devolver `AppResult` (decisão 12 do planejamento); nenhum teste falhou |
+
+**Testes novos:**
+
+| Classe de teste | Novos | Cobre |
+|---|---|---|
+| `WatchlistUseCasesTest` | +6 (total 23) | Falha de leitura e de gravação ao adicionar, marcar como assistido e avaliar: o caso de uso devolve `Failure` e nada é alterado |
+| `RefreshMovieDetailsUseCaseTest` | +1 (total 10) | Falha ao gravar os detalhes é repassada |
+
+---
+
 ## 2026-11-19 14:17 — T14: caso de uso do atraso da notificação (domain completo)
 
 | Item | Valor |

@@ -1,5 +1,6 @@
 package com.radierdev.keveoq.domain.fake
 
+import com.radierdev.keveoq.core.result.AppError
 import com.radierdev.keveoq.core.result.AppResult
 import com.radierdev.keveoq.domain.model.Mood
 import com.radierdev.keveoq.domain.model.MoodSearchCriteria
@@ -25,6 +26,9 @@ class FakeMovieRepository : MovieRepository {
         AppResult.Success(Recommendations(emptyList(), null))
     var fetchDetailsResult: AppResult<MovieDetails>? = null
     val videosByLanguage = mutableMapOf<String, AppResult<List<Video>>>()
+
+    /** Quando preenchido, a gravação dos detalhes no "banco" falha com este erro. */
+    var saveDetailsFailure: AppError? = null
 
     // Registro das chamadas
     var refreshCalls = 0
@@ -78,8 +82,10 @@ class FakeMovieRepository : MovieRepository {
         return videosByLanguage[language] ?: AppResult.Success(emptyList())
     }
 
-    override suspend fun saveMovieDetails(details: MovieDetails) {
+    override suspend fun saveMovieDetails(details: MovieDetails): AppResult<Unit> {
         saveDetailsCalls++
+        saveDetailsFailure?.let { return AppResult.Failure(it) }
         setDetails(details)
+        return AppResult.Success(Unit)
     }
 }

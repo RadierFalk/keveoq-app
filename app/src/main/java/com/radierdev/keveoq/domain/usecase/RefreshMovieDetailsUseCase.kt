@@ -41,8 +41,7 @@ class RefreshMovieDetailsUseCase(
             is AppResult.Failure -> return result
         }
 
-        movieRepository.saveMovieDetails(details.copy(trailerKey = trailerKey))
-        return AppResult.Success(Unit)
+        return movieRepository.saveMovieDetails(details.copy(trailerKey = trailerKey))
     }
 
     /** Tenta cada idioma em ordem e para no primeiro que tiver trailer válido. */

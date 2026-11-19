@@ -1,5 +1,6 @@
 package com.radierdev.keveoq.domain.usecase
 
+import com.radierdev.keveoq.core.result.AppResult
 import com.radierdev.keveoq.domain.model.AddToWatchlistResult
 import com.radierdev.keveoq.domain.model.MovieDetails
 import com.radierdev.keveoq.domain.model.SavedMovie
@@ -19,20 +20,26 @@ class AddToWatchlistUseCase(
     private val clock: Clock,
 ) {
     suspend operator fun invoke(details: MovieDetails): AddToWatchlistResult {
-        if (savedMovieRepository.getSavedMovie(details.id) != null) {
+        val existing = when (val result = savedMovieRepository.getSavedMovie(details.id)) {
+            is AppResult.Success -> result.data
+            is AppResult.Failure -> return AddToWatchlistResult.Failure(result.error)
+        }
+        if (existing != null) {
             return AddToWatchlistResult.AlreadyInList
         }
-        savedMovieRepository.save(
-            SavedMovie(
-                movieId = details.id,
-                title = details.title,
-                posterUrl = details.posterUrl,
-                releaseYear = details.releaseYear,
-                status = WatchStatus.WANT_TO_WATCH,
-                rating = null,
-                savedAt = clock.instant(),
-            ),
+
+        val movie = SavedMovie(
+            movieId = details.id,
+            title = details.title,
+            posterUrl = details.posterUrl,
+            releaseYear = details.releaseYear,
+            status = WatchStatus.WANT_TO_WATCH,
+            rating = null,
+            savedAt = clock.instant(),
         )
-        return AddToWatchlistResult.Added
+        return when (val result = savedMovieRepository.save(movie)) {
+            is AppResult.Success -> AddToWatchlistResult.Added
+            is AppResult.Failure -> AddToWatchlistResult.Failure(result.error)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.radierdev.keveoq.domain.usecase
 
+import com.radierdev.keveoq.core.result.AppResult
 import com.radierdev.keveoq.domain.model.MarkAsWatchedResult
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.repository.SavedMovieRepository
@@ -12,12 +13,16 @@ class MarkAsWatchedUseCase(
     private val savedMovieRepository: SavedMovieRepository,
 ) {
     suspend operator fun invoke(movieId: Int): MarkAsWatchedResult {
-        val saved = savedMovieRepository.getSavedMovie(movieId)
-            ?: return MarkAsWatchedResult.NotInList
+        val saved = when (val result = savedMovieRepository.getSavedMovie(movieId)) {
+            is AppResult.Success -> result.data ?: return MarkAsWatchedResult.NotInList
+            is AppResult.Failure -> return MarkAsWatchedResult.Failure(result.error)
+        }
         if (saved.status == WatchStatus.WATCHED) {
             return MarkAsWatchedResult.AlreadyWatched
         }
-        savedMovieRepository.updateStatus(movieId, WatchStatus.WATCHED)
-        return MarkAsWatchedResult.Marked
+        return when (val result = savedMovieRepository.updateStatus(movieId, WatchStatus.WATCHED)) {
+            is AppResult.Success -> MarkAsWatchedResult.Marked
+            is AppResult.Failure -> MarkAsWatchedResult.Failure(result.error)
+        }
     }
 }

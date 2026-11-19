@@ -112,6 +112,15 @@ class RefreshMovieDetailsUseCaseTest {
     }
 
     @Test
+    fun `falha ao gravar os detalhes deve ser repassada`() = runTest {
+        movieRepository.fetchDetailsResult = AppResult.Success(TestData.details(10))
+        movieRepository.saveDetailsFailure = AppError.Unknown
+
+        assertEquals(AppResult.Failure(AppError.Unknown), refreshDetails(10))
+        assertNull(movieRepository.storedDetails(10))
+    }
+
+    @Test
     fun `falha ao buscar videos deve ser repassada sem gravar os detalhes`() = runTest {
         movieRepository.fetchDetailsResult = AppResult.Success(TestData.details(10))
         movieRepository.videosByLanguage["pt-BR"] = AppResult.Failure(AppError.Network)

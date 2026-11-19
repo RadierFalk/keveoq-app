@@ -1,6 +1,7 @@
 package com.radierdev.keveoq.domain.usecase
 
 import app.cash.turbine.test
+import com.radierdev.keveoq.core.result.AppError
 import com.radierdev.keveoq.domain.fake.FakeSavedMovieRepository
 import com.radierdev.keveoq.domain.fake.TestData
 import com.radierdev.keveoq.domain.model.AddToWatchlistResult
@@ -128,6 +129,56 @@ class WatchlistUseCasesTest {
         assertEquals(RateMovieResult.InvalidRating, rateMovie(10, rating = 6))
         assertEquals(3, repository.stored(10)?.rating)
         assertEquals(0, repository.updateRatingCalls)
+    }
+
+    // Falhas do banco: viram o resultado Failure, sem exceção
+
+    @Test
+    fun `falha ao ler a lista deve impedir a adicao`() = runTest {
+        repository.readFailure = AppError.Unknown
+
+        assertEquals(AddToWatchlistResult.Failure(AppError.Unknown), addToWatchlist(TestData.details(10)))
+        assertEquals(0, repository.saveCalls)
+    }
+
+    @Test
+    fun `falha ao gravar deve retornar falha na adicao`() = runTest {
+        repository.writeFailure = AppError.Unknown
+
+        assertEquals(AddToWatchlistResult.Failure(AppError.Unknown), addToWatchlist(TestData.details(10)))
+        assertNull(repository.stored(10))
+    }
+
+    @Test
+    fun `falha ao gravar deve retornar falha ao marcar como assistido`() = runTest {
+        repository.givenSaved(TestData.saved(10))
+        repository.writeFailure = AppError.Unknown
+
+        assertEquals(MarkAsWatchedResult.Failure(AppError.Unknown), markAsWatched(10))
+        assertEquals(WatchStatus.WANT_TO_WATCH, repository.stored(10)?.status)
+    }
+
+    @Test
+    fun `falha ao ler deve retornar falha ao marcar como assistido`() = runTest {
+        repository.readFailure = AppError.Unknown
+
+        assertEquals(MarkAsWatchedResult.Failure(AppError.Unknown), markAsWatched(10))
+    }
+
+    @Test
+    fun `falha ao gravar deve retornar falha ao avaliar`() = runTest {
+        repository.givenSaved(TestData.saved(10, status = WatchStatus.WATCHED, rating = 3))
+        repository.writeFailure = AppError.Unknown
+
+        assertEquals(RateMovieResult.Failure(AppError.Unknown), rateMovie(10, rating = 5))
+        assertEquals(3, repository.stored(10)?.rating)
+    }
+
+    @Test
+    fun `falha ao ler deve retornar falha ao avaliar`() = runTest {
+        repository.readFailure = AppError.Unknown
+
+        assertEquals(RateMovieResult.Failure(AppError.Unknown), rateMovie(10, rating = 5))
     }
 
     // ObserveSavedMovieUseCase

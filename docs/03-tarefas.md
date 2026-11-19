@@ -94,7 +94,7 @@
 - **Relacionado:** RF06, RF07, RF20, RN09 · CA12, CA15–CA17
 - **Commit:** `feat: cria casos de uso de detalhes e trailer`
 
-### [ ] T13 — Casos de uso da lista "Quero assistir"
+### [x] T13 — Casos de uso da lista "Quero assistir"
 - **Descrição:** `ObserveSavedMovieUseCase`, `ObserveWatchlistUseCase`, `AddToWatchlistUseCase`, `MarkAsWatchedUseCase`, `RateMovieUseCase`.
 - **Pronto quando:** testes cobrem cada resultado (`AlreadyInList`, `AlreadyWatched`, `NotInList`, `NotWatched`, `InvalidRating`), troca de nota e filtro por status.
 - **Relacionado:** RF08–RF11, RN06–RN08 · CA20–CA24

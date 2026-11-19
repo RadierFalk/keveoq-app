@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:16 — T13: casos de uso da lista "Quero assistir"
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 90 |
+| Aprovados | 90 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `WatchlistUseCasesTest` | 17 | Adicionar como `WANT_TO_WATCH`; `AlreadyInList` (RN06, CA20), inclusive para filme já assistido; marcar como assistido, `AlreadyWatched` e `NotInList` (RN07, CA22); avaliar, trocar a nota, `NotWatched` para filme não assistido ou fora da lista (CA23) e `InvalidRating` para 0 e 6 (RN08, CA24); acompanhamento do status; filtros todos, quero assistir e assistidos (CA21); lista vazia |
+
+As classes anteriores foram executadas novamente, sem falhas.
+
+---
+
 ## 2026-11-19 14:15 — T12: casos de uso de detalhes e trailer
 
 | Item | Valor |

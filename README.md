@@ -62,4 +62,5 @@ Cobertura atual:
 - validação da avaliação pessoal (1 a 5 estrelas);
 - cálculo do atraso até a próxima janela da notificação (19h às 21h), incluindo viradas de mês e de ano;
 - casos de uso de recomendações, com repositórios falsos: uso do cache válido sem chamar a API, atualização com cache vazio ou expirado, pull-to-refresh, erro de rede quando offline e remoção imediata de filmes marcados como assistidos;
-- casos de uso de detalhes: validade de 24 horas, trailer em português com alternativa em inglês e atualização "tudo ou nada" em caso de falha.
+- casos de uso de detalhes: validade de 24 horas, trailer em português com alternativa em inglês e atualização "tudo ou nada" em caso de falha;
+- casos de uso da lista "Quero assistir": adicionar sem duplicar, marcar como assistido, avaliar (só assistidos, de 1 a 5) e filtrar por status.

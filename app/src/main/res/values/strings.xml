@@ -44,6 +44,9 @@
     <string name="details_overview_unavailable">Sinopse não disponível em português.</string>
     <string name="runtime_hours_minutes">%1$d h %2$d min</string>
     <string name="runtime_minutes">%1$d min</string>
+    <string name="details_trailer_title">Trailer</string>
+    <string name="details_trailer_error">Não foi possível reproduzir o trailer aqui.</string>
+    <string name="action_watch_on_youtube">Assistir no YouTube</string>
     <string name="message_already_in_list">Este filme já está na sua lista.</string>
     <string name="error_save">Não foi possível salvar a alteração. Tente novamente.</string>
 

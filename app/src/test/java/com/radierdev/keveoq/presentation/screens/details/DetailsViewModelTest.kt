@@ -11,6 +11,7 @@ import com.radierdev.keveoq.domain.fake.TestData
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.usecase.AddToWatchlistUseCase
 import com.radierdev.keveoq.domain.usecase.MarkAsWatchedUseCase
+import com.radierdev.keveoq.domain.usecase.ObserveConnectivityUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveMovieDetailsUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveSavedMovieUseCase
 import com.radierdev.keveoq.domain.usecase.RateMovieUseCase
@@ -20,6 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -40,6 +42,7 @@ class DetailsViewModelTest {
         movieId = movieId,
         observeMovieDetails = ObserveMovieDetailsUseCase(movieRepository),
         observeSavedMovie = ObserveSavedMovieUseCase(savedMovieRepository),
+        observeConnectivity = ObserveConnectivityUseCase(networkMonitor),
         refreshMovieDetails = RefreshMovieDetailsUseCase(movieRepository, networkMonitor, TestData.clock),
         addToWatchlist = AddToWatchlistUseCase(savedMovieRepository, TestData.clock),
         markAsWatched = MarkAsWatchedUseCase(savedMovieRepository),
@@ -158,6 +161,61 @@ class DetailsViewModelTest {
 
             viewModel.onRate(2)
             assertEquals(WatchlistAction.Rate(2), (awaitItem() as DetailsUiState.Success).action)
+        }
+    }
+
+    // Visibilidade do trailer (RF20, RF21)
+
+    @Test
+    fun `com conexao e trailer valido deve exibir o trailer`() = runTest {
+        movieRepository.setDetails(TestData.details(movieId, trailerKey = "abc123"))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            assertEquals("abc123", (awaitItem() as DetailsUiState.Success).trailerKey)
+        }
+    }
+
+    @Test
+    fun `sem trailer valido a secao nao deve aparecer`() = runTest {
+        movieRepository.setDetails(TestData.details(movieId, trailerKey = null))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            assertNull((awaitItem() as DetailsUiState.Success).trailerKey)
+        }
+    }
+
+    @Test
+    fun `offline o trailer nao deve aparecer mesmo com a chave gravada`() = runTest {
+        movieRepository.setDetails(TestData.details(movieId, trailerKey = "abc123"))
+        networkMonitor.isOnline.value = false
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            val state = awaitItem() as DetailsUiState.Success
+            assertNull(state.trailerKey)
+            assertEquals("Filme 10", state.details.title) // os detalhes continuam visíveis
+        }
+    }
+
+    @Test
+    fun `trailer deve sumir ao perder a conexao e voltar ao recupera-la`() = runTest {
+        movieRepository.setDetails(TestData.details(movieId, trailerKey = "abc123"))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            assertEquals("abc123", (awaitItem() as DetailsUiState.Success).trailerKey)
+
+            networkMonitor.isOnline.value = false
+            assertNull((awaitItem() as DetailsUiState.Success).trailerKey)
+
+            networkMonitor.isOnline.value = true
+            assertEquals("abc123", (awaitItem() as DetailsUiState.Success).trailerKey)
         }
     }
 

@@ -30,11 +30,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -47,6 +50,7 @@ import com.radierdev.keveoq.presentation.components.ErrorState
 import com.radierdev.keveoq.presentation.components.LoadingState
 import com.radierdev.keveoq.presentation.components.PosterImage
 import com.radierdev.keveoq.presentation.components.RatingBar
+import com.radierdev.keveoq.presentation.components.TrailerPlayer
 import com.radierdev.keveoq.presentation.theme.Dimens
 import com.radierdev.keveoq.presentation.theme.KeveOQTheme
 import org.koin.compose.viewmodel.koinViewModel
@@ -128,6 +132,7 @@ fun DetailsScreen(
             is DetailsUiState.Success -> DetailsContent(
                 details = uiState.details,
                 action = uiState.action,
+                trailerKey = uiState.trailerKey,
                 onAddToWatchlist = onAddToWatchlist,
                 onMarkAsWatched = onMarkAsWatched,
                 onRate = onRate,
@@ -142,6 +147,7 @@ fun DetailsScreen(
 private fun DetailsContent(
     details: MovieDetails,
     action: WatchlistAction,
+    trailerKey: String?,
     onAddToWatchlist: () -> Unit,
     onMarkAsWatched: () -> Unit,
     onRate: (Int) -> Unit,
@@ -187,6 +193,11 @@ private fun DetailsContent(
             onRate = onRate,
         )
 
+        // Sem trailer válido ou sem conexão, a seção inteira não aparece (RF20, RF21).
+        if (trailerKey != null) {
+            TrailerSection(trailerKey)
+        }
+
         Column(verticalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing)) {
             Text(
                 text = stringResource(R.string.details_overview_title),
@@ -201,6 +212,43 @@ private fun DetailsContent(
         }
     }
 }
+
+/**
+ * Trailer no player incorporado. Se o player falhar, troca por uma mensagem e o botão
+ * "Assistir no YouTube", que abre o link no app do YouTube ou no navegador (RF22).
+ * O `LocalUriHandler` do Compose abre o link sem o ViewModel precisar de `Context`.
+ */
+@Composable
+private fun TrailerSection(trailerKey: String) {
+    var playerFailed by remember(trailerKey) { mutableStateOf(false) }
+    val uriHandler = LocalUriHandler.current
+
+    Column(verticalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing)) {
+        Text(
+            text = stringResource(R.string.details_trailer_title),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+        if (playerFailed) {
+            Text(
+                text = stringResource(R.string.details_trailer_error),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            OutlinedButton(
+                onClick = { uriHandler.openUri(youTubeUrl(trailerKey)) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.action_watch_on_youtube))
+            }
+        } else {
+            TrailerPlayer(videoKey = trailerKey, onError = { playerFailed = true })
+        }
+    }
+}
+
+/** Link externo do trailer (CLAUDE.md). */
+private fun youTubeUrl(key: String) = "https://www.youtube.com/watch?v=$key"
 
 /** Ano, duração e nota, em texto secundário. */
 @Composable

@@ -7,6 +7,30 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:09 — T23: trailer na tela de detalhes
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 211 |
+| Aprovados | 211 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Testes novos em `DetailsViewModelTest`** (+4, total 13), regra de visibilidade do trailer:
+
+| Teste | Cobre |
+|---|---|
+| com conexão e trailer válido deve exibir o trailer | RF20, CA15 |
+| sem trailer válido a seção não deve aparecer | CA17 |
+| offline o trailer não deve aparecer mesmo com a chave gravada | RF21, CA18 |
+| trailer deve sumir ao perder a conexão e voltar ao recuperá-la | RF21 |
+
+O player do YouTube (View Android) e o botão "Assistir no YouTube" (CA19) não são testáveis na JVM; a verificação é manual.
+
+---
+
 ## 2026-11-19 15:06 — T22: tela de detalhes do filme
 
 | Item | Valor |

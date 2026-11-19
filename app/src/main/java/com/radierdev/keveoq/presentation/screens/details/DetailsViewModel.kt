@@ -15,6 +15,7 @@ import com.radierdev.keveoq.domain.model.SavedMovie
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.usecase.AddToWatchlistUseCase
 import com.radierdev.keveoq.domain.usecase.MarkAsWatchedUseCase
+import com.radierdev.keveoq.domain.usecase.ObserveConnectivityUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveMovieDetailsUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveSavedMovieUseCase
 import com.radierdev.keveoq.domain.usecase.RateMovieUseCase
@@ -47,7 +48,15 @@ sealed interface WatchlistAction {
 @Immutable
 sealed interface DetailsUiState {
     data object Loading : DetailsUiState
-    data class Success(val details: MovieDetails, val action: WatchlistAction) : DetailsUiState
+    /**
+     * @property trailerKey chave do trailer a exibir, ou `null` para esconder a seção:
+     * sem trailer válido (CA17) ou sem conexão (RF21, CA18).
+     */
+    data class Success(
+        val details: MovieDetails,
+        val action: WatchlistAction,
+        val trailerKey: String? = null,
+    ) : DetailsUiState
     data class Error(@StringRes val messageRes: Int) : DetailsUiState
 }
 
@@ -68,6 +77,7 @@ class DetailsViewModel(
     private val movieId: Int,
     observeMovieDetails: ObserveMovieDetailsUseCase,
     observeSavedMovie: ObserveSavedMovieUseCase,
+    observeConnectivity: ObserveConnectivityUseCase,
     private val refreshMovieDetails: RefreshMovieDetailsUseCase,
     private val addToWatchlist: AddToWatchlistUseCase,
     private val markAsWatched: MarkAsWatchedUseCase,
@@ -83,10 +93,16 @@ class DetailsViewModel(
     val uiState: StateFlow<DetailsUiState> = combine(
         observeMovieDetails(movieId),
         observeSavedMovie(movieId),
+        observeConnectivity(),
         refreshStatus,
-    ) { details, saved, status ->
+    ) { details, saved, isOnline, status ->
         when {
-            details != null -> DetailsUiState.Success(details, actionFor(saved))
+            details != null -> DetailsUiState.Success(
+                details = details,
+                action = actionFor(saved),
+                // A chave fica gravada, mas o trailer só aparece com conexão (seção 6.3).
+                trailerKey = details.trailerKey.takeIf { isOnline },
+            )
             status is RefreshStatus.Failed -> DetailsUiState.Error(ErrorMessageMapper.messageFor(status.error))
             else -> DetailsUiState.Loading
         }

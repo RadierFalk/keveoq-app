@@ -158,7 +158,7 @@
 - **Relacionado:** RF06–RF08, RF10, RF11 · CA12, CA14, CA20, CA22, CA24
 - **Commit:** `feat: implementa tela de detalhes do filme`
 
-### [ ] T23 — Trailer
+### [x] T23 — Trailer
 - **Descrição:** `TrailerPlayer` (android-youtube-player em `AndroidView`, ligado ao ciclo de vida); seção visível só com conexão e trailer; botão "Assistir no YouTube" em caso de erro do player.
 - **Pronto quando:** trailer toca com internet; seção some offline; erro do player mostra o botão, que abre o YouTube ou o navegador. Teste do ViewModel para a regra de visibilidade.
 - **Relacionado:** RF20–RF22 · CA15, CA18, CA19

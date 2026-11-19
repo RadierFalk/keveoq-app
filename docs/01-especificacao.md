@@ -34,6 +34,7 @@ Pessoas que assistem filmes em casa e querem uma sugestão rápida, sem precisar
 | F6 | Tela "Sobre" com a atribuição ao TMDB |
 | F7 | Notificação periódica sugerindo o uso do app |
 | F8 | Trailer do filme na tela de detalhes (somente com conexão) |
+| F9 | Sorteio de um filme aleatório ("Me surpreenda"), para quem não quer escolher um humor |
 
 **Fora do escopo:** login e cadastro, contas do TMDB, busca livre por texto e remoção de filmes da lista "Quero assistir".
 
@@ -65,6 +66,8 @@ Pessoas que assistem filmes em casa e querem uma sugestão rápida, sem precisar
 | RF22 | Se o player incorporado não conseguir reproduzir o vídeo, o app deve exibir o botão "Assistir no YouTube", que abre o app do YouTube ou o navegador. | F8 |
 | RF23 | Toda tela deve representar os estados de carregamento, conteúdo, vazio e erro, com mensagens em português, amigáveis e sem detalhes técnicos. | Todas |
 | RF24 | A barra superior da tela inicial deve ter botões de ícone que abrem as telas "Quero assistir" e "Sobre". | F1, F4, F6 |
+| RF25 | A tela inicial deve ter o botão "Me surpreenda", acima de "Ver filmes" e sempre habilitado, que sorteia um filme conforme RN12 e abre a tela de detalhes dele, sem que o usuário escolha um humor. | F9 |
+| RF26 | Durante o sorteio, o botão deve indicar que está trabalhando e não aceitar novos toques; se não houver filme para sortear, o app deve informar o motivo sem sair da tela inicial. | F9 |
 
 ## 7. Requisitos não funcionais (RNF)
 
@@ -126,6 +129,8 @@ As recomendações são ordenadas por popularidade (decrescente).
 
 **RN11 — Volume por atualização.** Cada atualização das recomendações de um humor busca as 2 primeiras páginas da API (até 40 filmes) antes de aplicar RN02 a RN04.
 
+**RN12 — Sorteio de filme.** O sorteio escolhe um humor ao acaso e usa as recomendações desse humor, obtidas como em qualquer abertura de recomendações (cache válido de 24 h ou atualização pela API, RN05), já filtradas por RN02 a RN04 (sem filmes assistidos, repetidos ou com poucos votos). Entre esses filmes, um é escolhido ao acaso. Se o humor sorteado não tiver nenhum filme disponível (por exemplo, sem cache e sem conexão, ou todos já assistidos), os demais humores são tentados, em ordem aleatória. Se nenhum humor tiver filmes, o sorteio não encontra filme e o usuário é informado.
+
 ## 9. Critérios de aceite
 
 Cada critério está no formato *Dado / Quando / Então* e indica os requisitos que verifica.
@@ -174,6 +179,11 @@ Cada critério está no formato *Dado / Quando / Então* e indica os requisitos 
 - **CA31** (RF17, RF18) Dado que a notificação foi exibida, quando o usuário toca nela, então o app abre na tela de seleção de humor.
 - **CA34** (RF24) Dado a tela inicial, quando o usuário toca nos ícones da barra superior, então abrem-se as telas "Quero assistir" e "Sobre".
 
+**Sorteio de filme**
+- **CA35** (RF25, RN12) Dado a tela inicial com conexão, sem nenhum humor selecionado, quando o usuário toca em "Me surpreenda", então abre-se a tela de detalhes de um filme que não está marcado como assistido.
+- **CA36** (RN12) Dado que o aparelho está offline e só um humor tem recomendações em cache, quando o usuário toca em "Me surpreenda", então é sorteado um filme desse humor.
+- **CA37** (RF26, RN12) Dado que o aparelho está offline e nenhum humor tem cache, quando o usuário toca em "Me surpreenda", então aparece uma mensagem informando que não há filmes para sortear, e o app continua na tela inicial.
+
 ## 10. Decisões registradas
 
 Pontos que o `CLAUDE.md` não definia, decididos durante a aprovação desta especificação:
@@ -183,3 +193,7 @@ Pontos que o `CLAUDE.md` não definia, decididos durante a aprovação desta esp
 3. **Volume de recomendações:** 2 páginas por atualização, até 40 filmes (RN11).
 4. **Acesso a "Quero assistir" e "Sobre":** botões de ícone na barra superior da tela inicial (RF24).
 5. **"Atualizado há…":** exibido na tela de recomendações (RF03).
+
+Decididos depois da aprovação inicial, durante a implementação:
+
+6. **Sorteio de filme (F9):** acrescentado a pedido do responsável do projeto. O filme vem de um humor aleatório, reaproveitando as recomendações (RN12), e o botão "Me surpreenda" fica acima de "Ver filmes" (RF25).

@@ -184,6 +184,20 @@
 - **Relacionado:** RF17–RF19, RN10 · CA28, CA30, CA31 · Seção 8
 - **Commit:** `feat: adiciona notificacao periodica`
 
+## Sorteio de filme (acrescentado após a T26)
+
+### [ ] T26A — Caso de uso do sorteio
+- **Descrição:** `RandomMovieResult` (`Found(movieId, mood)`, `NoMovieAvailable`) e `PickRandomMovieUseCase`, com `Random` injetado, reaproveitando `RefreshRecommendationsUseCase` e `ObserveRecommendationsUseCase`; registrar no `domainModule` e `Random.Default` no `appModule`.
+- **Pronto quando:** testes com repositórios falsos e `Random` fixo cobrem: sorteio com conexão, filme assistido nunca sorteado, humor sem filmes passa para o próximo, offline com cache em um único humor (CA36), nenhum filme disponível (CA37) e cache válido sem chamar a API.
+- **Relacionado:** RF25, RN12 · CA35–CA37 · Seção 2.4, decisão 15
+- **Commit:** `feat: cria caso de uso do sorteio de filme`
+
+### [ ] T26B — Botão "Me surpreenda"
+- **Descrição:** ícone `ic_casino` (Material Icons); `OutlinedButton` "Me surpreenda" acima de "Ver filmes"; `MoodViewModel` com `isPickingRandom` e eventos únicos (abrir detalhes ou Snackbar "não há filmes para sortear"); Snackbar na tela de humor; navegação para os detalhes.
+- **Pronto quando:** testes do ViewModel cobrem: navegação para o filme sorteado, Snackbar sem filme, indicador ligado durante o sorteio e toque ignorado enquanto sorteia; previews claro/escuro atualizados; verificado no aparelho online e offline.
+- **Relacionado:** RF25, RF26 · CA35–CA37 · Seção 9.2
+- **Commit:** `feat: adiciona botao me surpreenda na tela inicial`
+
 ## Validação
 
 ### [ ] T27 — README completo

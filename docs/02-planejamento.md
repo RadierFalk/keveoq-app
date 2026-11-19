@@ -130,6 +130,7 @@ Os nomes dos humores ficam em inglês no código; o texto em português ("Feliz"
 | `RateMovieUseCase` | Valida e grava a nota (também para trocar a nota) | RF11, RN08 |
 | `ObserveConnectivityUseCase` | Expõe o estado da conexão | RF13 |
 | `CalculateNotificationDelayUseCase` | Usa `NotificationWindow` com o relógio injetado | RN10 |
+| `PickRandomMovieUseCase` | Embaralha os humores com um `Random` injetado; para cada humor, chama `RefreshRecommendationsUseCase` (sem `force`) e lê as recomendações filtradas de `ObserveRecommendationsUseCase`; no primeiro humor com filmes, sorteia um. Devolve `RandomMovieResult.Found(movieId, mood)` ou `NoMovieAvailable` | RF25, RN12 |
 
 **Resultados de regra de negócio.** `AppError` descreve falhas de infraestrutura (rede, HTTP, leitura). Uma recusa de regra de negócio não é uma falha técnica, então esses casos de uso devolvem tipos próprios, por exemplo:
 
@@ -364,7 +365,7 @@ O humor vai como `String` (nome do enum) porque tipos simples na rota não exige
 
 | Tela | Conteúdo | Estados |
 |---|---|---|
-| Humor | `displaySmall` "Como você está hoje?"; grade de 8 cards (nome em `titleMedium`, dica em `bodySmall`); botão "Ver filmes" habilitado após a seleção; barra superior com ícones "Quero assistir" e "Sobre" | Só `Success` (conteúdo fixo) |
+| Humor | `displaySmall` "Como você está hoje?"; grade de 8 cards (nome em `titleMedium`, dica em `bodySmall`); botão "Ver filmes" habilitado após a seleção; botão "Me surpreenda" (`OutlinedButton` com ícone de dado) acima de "Ver filmes", com indicador enquanto sorteia; barra superior com o logo, "Quero assistir" e "Sobre" | Conteúdo fixo + `isPickingRandom`; resultado do sorteio por evento único (navegar para os detalhes ou Snackbar) |
 | Recomendações | Título com o humor (`headlineSmall`), "Atualizado há…", lista com `MovieListItem`, pull-to-refresh, Snackbar | Loading, Success, Empty, Error |
 | Detalhes | Pôster em largura total (320 dp), título, ano, duração, nota, chips de gênero, sinopse, trailer, ação conforme o status: "Quero assistir" (`Button`), "Já assisti" (`OutlinedButton`) ou estrelas | Loading, Success, Error |
 | Quero assistir | Filtro por status (chips: Todos, Quero assistir, Assistidos), itens com "Já assisti" ou estrelas | Loading, Success, Empty, Error |
@@ -463,3 +464,4 @@ Decididas durante a implementação:
 12. **Lista "Quero assistir" também devolve `AppResult`** (correção após a T14). As leituras pontuais e escritas do `SavedMovieRepository` e o `saveMovieDetails` devolvem `AppResult`, como exige a regra "repositórios não propagam exceções". Os resultados `AddToWatchlistResult`, `MarkAsWatchedResult` e `RateMovieResult` ganharam o caso `Failure(AppError)` para falhas técnicas do banco, separado das recusas de regra de negócio.
 13. **Tabelas guardam `posterUrl` e `releaseYear`** (T16), em vez de `posterPath` e `releaseDate` da seção 5. Os detalhes e a lista salva são gravados a partir dos modelos do domain, que só têm a URL completa e o ano; guardar os mesmos campos evita conversões de volta e mantém a URL do pôster idêntica à usada pelo cache do Coil.
 14. **`MovieDao` usa `@Upsert` em vez de `REPLACE`** (T16). O `REPLACE` apaga a linha antes de inserir, e o `CASCADE` da chave estrangeira apagaria as recomendações do mesmo filme nos outros humores.
+15. **Sorteio de filme (F9, RN12)**, acrescentado após a T26. O `PickRandomMovieUseCase` reaproveita os casos de uso de recomendações em vez de criar uma consulta nova à API: assim o sorteio respeita o cache de 24 h, funciona offline com os humores que já têm cache e já exclui assistidos e repetidos. O `kotlin.random.Random` é injetado (fixo nos testes, `Random.Default` no app), para o sorteio ser testável. Com conexão, normalmente só o primeiro humor é consultado; offline, os humores sem cache devolvem `Network` sem chamar a API, então tentar os oito é rápido. O ícone de dado (`ic_casino`) vem do Material Icons, como os demais ícones fora do conjunto core.

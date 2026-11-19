@@ -134,7 +134,7 @@
 
 ## Presentation
 
-### [ ] T19 — Navegação, Scaffold raiz e componentes base
+### [x] T19 — Navegação, Scaffold raiz e componentes base
 - **Descrição:** rotas type-safe, `NavHost`, `KeveOQAppContent` com `OfflineBanner`; componentes `LoadingState`, `EmptyState`, `ErrorState`, `PosterImage` (Coil, com marcador offline), `MovieListItem`, `RatingBar`; `ErrorMessageMapper` e `UpdatedAtFormatter` com testes; ícones via Vector Asset (`bookmark`, `cloud_off`, `movie`).
 - **Pronto quando:** previews claro/escuro de cada componente; banner aparece ao desligar a internet; testes dos formatadores passam.
 - **Relacionado:** RF13, RF23 · CA11, CA13, CA32 · Seções 6.6, 7.2, 9

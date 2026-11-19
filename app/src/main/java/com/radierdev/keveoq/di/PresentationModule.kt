@@ -1,7 +1,10 @@
 package com.radierdev.keveoq.di
 
+import com.radierdev.keveoq.presentation.KeveOQAppViewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/** ViewModels (`viewModel`). Preenchido a partir da T20. */
+/** ViewModels: o Koin cria cada um ligado ao ciclo de vida da tela que o pediu. */
 val presentationModule = module {
+    viewModelOf(::KeveOQAppViewModel)
 }

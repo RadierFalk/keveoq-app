@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">KeveOQ</string>
+
+    <!-- Títulos provisórios das telas (substituídos pelas telas reais nas tarefas T20 a T25) -->
+    <string name="screen_mood">Como você está hoje?</string>
+    <string name="screen_recommendations">Recomendações</string>
+    <string name="screen_details">Detalhes do filme</string>
+    <string name="screen_watchlist">Quero assistir</string>
+    <string name="screen_about">Sobre</string>
+    <string name="screen_pending">Esta tela ainda está em construção.</string>
+
+    <!-- Conexão -->
+    <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
+
+    <!-- Ações comuns -->
+    <string name="action_retry">Tentar novamente</string>
+
+    <!-- Mensagens de erro (seção 7.2 do planejamento) -->
+    <string name="error_network">Não foi possível carregar os filmes. Verifique sua conexão.</string>
+    <string name="error_unauthorized">Não foi possível acessar o catálogo de filmes.</string>
+    <string name="error_server">O catálogo de filmes está fora do ar. Tente mais tarde.</string>
+    <string name="error_generic">Algo deu errado ao carregar os filmes. Tente novamente.</string>
+
+    <!-- "Atualizado há…" (seção 6.2 do planejamento) -->
+    <string name="updated_just_now">Atualizado agora</string>
+    <plurals name="updated_minutes_ago">
+        <item quantity="one">Atualizado há %d min</item>
+        <item quantity="other">Atualizado há %d min</item>
+    </plurals>
+    <plurals name="updated_hours_ago">
+        <item quantity="one">Atualizado há %d h</item>
+        <item quantity="other">Atualizado há %d h</item>
+    </plurals>
+    <plurals name="updated_days_ago">
+        <item quantity="one">Atualizado há %d dia</item>
+        <item quantity="other">Atualizado há %d dias</item>
+    </plurals>
+
+    <!-- Filme -->
+    <string name="poster_unavailable">Pôster indisponível</string>
+    <string name="vote_average">%1$.1f</string>
+    <string name="vote_average_description">Nota %1$.1f de 10</string>
+
+    <!-- Avaliação pessoal -->
+    <plurals name="rating_description">
+        <item quantity="one">Sua nota: %d estrela</item>
+        <item quantity="other">Sua nota: %d estrelas</item>
+    </plurals>
+    <string name="rating_none_description">Sem nota</string>
+    <plurals name="rating_action">
+        <item quantity="one">Dar %d estrela</item>
+        <item quantity="other">Dar %d estrelas</item>
+    </plurals>
 </resources>

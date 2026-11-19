@@ -14,4 +14,11 @@ object Dimens {
     val PosterListWidth = 72.dp
     val PosterListHeight = 108.dp
     val PosterDetailsHeight = 320.dp
+
+    // Valores internos dos componentes, derivados da escala acima.
+    val SmallSpacing = 4.dp
+    val MediumSpacing = 8.dp
+    val ContentPadding = 12.dp
+    val BorderWidth = 1.dp
+    val IconSmall = 18.dp
 }

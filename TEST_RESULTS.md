@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:47 — T19: navegação e componentes base
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 183 |
+| Aprovados | 183 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Opt-in de `ExperimentalCoroutinesApi` na `MainDispatcherRule`, para remover dois avisos de compilação (sem mudança de comportamento) |
+
+**Classes novas (presentation):**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `ErrorMessageMapperTest` | 5 | `Network`, 401, 500/503, outros HTTP, `Serialization` e `Unknown` → mensagem em português, sem termos técnicos (CA13) |
+| `UpdatedAtFormatterTest` | 8 | Faixas de "Atualizado há…": 59 s, 1 min, 59 min, 3 h (CA32), 23 h 59 min, 24 h, 3 dias e data futura |
+| `KeveOQAppViewModelTest` | 2 | Começa online; online → offline → online, para o banner (RF13, CA11) |
+
+---
+
 ## 2026-11-19 14:40 — T18: repositório da lista "Quero assistir" e injeção de dependências (camada Data completa)
 
 | Item | Valor |

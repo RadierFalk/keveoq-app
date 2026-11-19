@@ -37,6 +37,7 @@ val presentationModule = module {
             observeMovieDetails = get(),
             observeSavedMovie = get(),
             observeConnectivity = get(),
+            isInTheaters = get(),
             refreshMovieDetails = get(),
             addToWatchlist = get(),
             markAsWatched = get(),

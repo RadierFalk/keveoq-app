@@ -206,7 +206,7 @@
 - **Relacionado:** RF27, RF28, RN13, RN14 · CA38–CA41 · decisão 16
 - **Commit:** `feat: busca e guarda onde assistir cada filme`
 
-### [ ] T26D — Seção "Onde assistir" nos detalhes
+### [x] T26D — Seção "Onde assistir" nos detalhes
 - **Descrição:** seção na tela de detalhes com o selo "Em cartaz nos cinemas", os grupos "Incluso na assinatura", "Alugar" e "Comprar" (logo e nome), mensagem quando não há serviços, atribuição "Dados de disponibilidade: JustWatch" e o botão "Ver opções no JustWatch" (só com conexão e link).
 - **Pronto quando:** testes do `DetailsViewModel` cobrem selo dentro e fora do período, grupos repassados, botão escondido offline; previews claro/escuro; verificado no aparelho.
 - **Relacionado:** RF27–RF29 · CA38–CA41

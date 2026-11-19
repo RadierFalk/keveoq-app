@@ -25,6 +25,7 @@ import org.junit.Test
 import org.koin.core.KoinApplication
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
+import com.radierdev.keveoq.domain.usecase.IsInTheatersUseCase
 import com.radierdev.keveoq.domain.usecase.PickRandomMovieUseCase
 import java.time.Clock
 import kotlin.random.Random
@@ -67,5 +68,6 @@ class DomainModuleTest {
         assertNotNull(koin.get<RateMovieUseCase>())
         assertNotNull(koin.get<CalculateNotificationDelayUseCase>())
         assertNotNull(koin.get<PickRandomMovieUseCase>())
+        assertNotNull(koin.get<IsInTheatersUseCase>())
     }
 }

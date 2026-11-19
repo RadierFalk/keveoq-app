@@ -7,6 +7,32 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:55 — T26D: seção "Onde assistir" nos detalhes
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 263 |
+| Aprovados | 263 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Testes novos em `DetailsViewModelTest`** (+4, total 17):
+
+| Teste | Cobre |
+|---|---|
+| deve repassar os serviços e o link com conexão | RF27, RF29, CA38 |
+| offline os serviços continuam visíveis mas sem o botão do JustWatch | RF29, CA41 |
+| filme lançado nos cinemas há 10 dias deve ter o selo em cartaz | RF28, RN14, CA40 |
+| filme lançado nos cinemas há 60 dias não deve ter o selo | RF28, RN14, CA40 |
+
+`DomainModuleTest` passou a conferir também o `IsInTheatersUseCase`.
+
+**Pendente:** verificação visual da seção e da migração do banco no aparelho (desconectado nesta execução).
+
+---
+
 ## 2026-11-19 15:53 — T26C: dados e regras de "onde assistir"
 
 | Item | Valor |

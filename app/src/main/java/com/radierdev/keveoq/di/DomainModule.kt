@@ -3,6 +3,7 @@ package com.radierdev.keveoq.di
 import com.radierdev.keveoq.domain.usecase.AddToWatchlistUseCase
 import com.radierdev.keveoq.domain.usecase.CalculateNotificationDelayUseCase
 import com.radierdev.keveoq.domain.usecase.GetMoodsUseCase
+import com.radierdev.keveoq.domain.usecase.IsInTheatersUseCase
 import com.radierdev.keveoq.domain.usecase.MarkAsWatchedUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveConnectivityUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveMovieDetailsUseCase
@@ -37,4 +38,5 @@ val domainModule = module {
     factoryOf(::RateMovieUseCase)
     factoryOf(::CalculateNotificationDelayUseCase)
     factoryOf(::PickRandomMovieUseCase)
+    factoryOf(::IsInTheatersUseCase)
 }

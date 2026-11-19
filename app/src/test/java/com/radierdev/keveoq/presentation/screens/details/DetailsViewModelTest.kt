@@ -20,7 +20,12 @@ import com.radierdev.keveoq.presentation.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import com.radierdev.keveoq.domain.model.WatchProvider
+import com.radierdev.keveoq.domain.model.WatchProviders
+import com.radierdev.keveoq.domain.usecase.IsInTheatersUseCase
+import java.time.LocalDate
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -43,6 +48,7 @@ class DetailsViewModelTest {
         observeMovieDetails = ObserveMovieDetailsUseCase(movieRepository),
         observeSavedMovie = ObserveSavedMovieUseCase(savedMovieRepository),
         observeConnectivity = ObserveConnectivityUseCase(networkMonitor),
+        isInTheaters = IsInTheatersUseCase(TestData.clock),
         refreshMovieDetails = RefreshMovieDetailsUseCase(movieRepository, networkMonitor, TestData.clock),
         addToWatchlist = AddToWatchlistUseCase(savedMovieRepository, TestData.clock),
         markAsWatched = MarkAsWatchedUseCase(savedMovieRepository),
@@ -216,6 +222,68 @@ class DetailsViewModelTest {
 
             networkMonitor.isOnline.value = true
             assertEquals("abc123", (awaitItem() as DetailsUiState.Success).trailerKey)
+        }
+    }
+
+    // Onde assistir (RF27–RF29)
+
+    private val providers = WatchProviders(
+        subscription = listOf(WatchProvider(8, "Netflix", null)),
+        link = "https://www.themoviedb.org/movie/10/watch?locale=BR",
+    )
+
+    // TestData.NOW é 2026-11-19 (UTC).
+    private fun detailsReleasedDaysAgo(days: Long) = TestData.details(movieId).copy(
+        watchProviders = providers,
+        theatricalReleaseBr = LocalDate.of(2026, 11, 19).minusDays(days),
+    )
+
+    @Test
+    fun `deve repassar os servicos e o link com conexao`() = runTest {
+        movieRepository.setDetails(detailsReleasedDaysAgo(100))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            val state = awaitItem() as DetailsUiState.Success
+            assertEquals(listOf("Netflix"), state.details.watchProviders.subscription.map { it.name })
+            assertEquals("https://www.themoviedb.org/movie/10/watch?locale=BR", state.watchProvidersLink)
+        }
+    }
+
+    @Test
+    fun `offline os servicos continuam visiveis mas sem o botao do justwatch`() = runTest {
+        movieRepository.setDetails(detailsReleasedDaysAgo(100))
+        networkMonitor.isOnline.value = false
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            val state = awaitItem() as DetailsUiState.Success
+            assertEquals(listOf("Netflix"), state.details.watchProviders.subscription.map { it.name })
+            assertNull(state.watchProvidersLink)
+        }
+    }
+
+    @Test
+    fun `filme lancado nos cinemas ha 10 dias deve ter o selo em cartaz`() = runTest {
+        movieRepository.setDetails(detailsReleasedDaysAgo(10))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            assertTrue((awaitItem() as DetailsUiState.Success).isInTheaters)
+        }
+    }
+
+    @Test
+    fun `filme lancado nos cinemas ha 60 dias nao deve ter o selo`() = runTest {
+        movieRepository.setDetails(detailsReleasedDaysAgo(60))
+        val viewModel = createViewModel()
+
+        viewModel.uiState.test {
+            skipItems(1)
+            assertFalse((awaitItem() as DetailsUiState.Success).isInTheaters)
         }
     }
 

@@ -14,6 +14,7 @@ import com.radierdev.keveoq.domain.model.RateMovieResult
 import com.radierdev.keveoq.domain.model.SavedMovie
 import com.radierdev.keveoq.domain.model.WatchStatus
 import com.radierdev.keveoq.domain.usecase.AddToWatchlistUseCase
+import com.radierdev.keveoq.domain.usecase.IsInTheatersUseCase
 import com.radierdev.keveoq.domain.usecase.MarkAsWatchedUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveConnectivityUseCase
 import com.radierdev.keveoq.domain.usecase.ObserveMovieDetailsUseCase
@@ -56,6 +57,10 @@ sealed interface DetailsUiState {
         val details: MovieDetails,
         val action: WatchlistAction,
         val trailerKey: String? = null,
+        /** Selo "Em cartaz nos cinemas" (RF28, RN14). */
+        val isInTheaters: Boolean = false,
+        /** Página do JustWatch para o botão; `null` sem conexão ou sem link (RF29). */
+        val watchProvidersLink: String? = null,
     ) : DetailsUiState
     data class Error(@StringRes val messageRes: Int) : DetailsUiState
 }
@@ -78,6 +83,7 @@ class DetailsViewModel(
     observeMovieDetails: ObserveMovieDetailsUseCase,
     observeSavedMovie: ObserveSavedMovieUseCase,
     observeConnectivity: ObserveConnectivityUseCase,
+    private val isInTheaters: IsInTheatersUseCase,
     private val refreshMovieDetails: RefreshMovieDetailsUseCase,
     private val addToWatchlist: AddToWatchlistUseCase,
     private val markAsWatched: MarkAsWatchedUseCase,
@@ -102,6 +108,9 @@ class DetailsViewModel(
                 action = actionFor(saved),
                 // A chave fica gravada, mas o trailer só aparece com conexão (seção 6.3).
                 trailerKey = details.trailerKey.takeIf { isOnline },
+                isInTheaters = isInTheaters(details.theatricalReleaseBr),
+                // Os serviços aparecem offline (estão no banco); o link externo, não.
+                watchProvidersLink = details.watchProviders.link.takeIf { isOnline },
             )
             status is RefreshStatus.Failed -> DetailsUiState.Error(ErrorMessageMapper.messageFor(status.error))
             else -> DetailsUiState.Loading

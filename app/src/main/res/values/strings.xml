@@ -51,6 +51,14 @@
     <string name="details_overview_unavailable">Sinopse não disponível em português.</string>
     <string name="runtime_hours_minutes">%1$d h %2$d min</string>
     <string name="runtime_minutes">%1$d min</string>
+    <string name="where_to_watch_title">Onde assistir</string>
+    <string name="where_to_watch_in_theaters">Em cartaz nos cinemas</string>
+    <string name="where_to_watch_subscription">Incluso na assinatura</string>
+    <string name="where_to_watch_rent">Alugar</string>
+    <string name="where_to_watch_buy">Comprar</string>
+    <string name="where_to_watch_none">Não disponível em serviços digitais no Brasil no momento.</string>
+    <string name="where_to_watch_attribution">Dados de disponibilidade: JustWatch</string>
+    <string name="action_open_justwatch">Ver opções no JustWatch</string>
     <string name="details_trailer_title">Trailer</string>
     <string name="details_trailer_error">Não foi possível reproduzir o trailer aqui.</string>
     <string name="action_watch_on_youtube">Assistir no YouTube</string>

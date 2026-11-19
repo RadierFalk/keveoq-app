@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -45,7 +46,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.radierdev.keveoq.R
+import coil3.compose.AsyncImage
 import com.radierdev.keveoq.domain.model.MovieDetails
+import com.radierdev.keveoq.domain.model.WatchProvider
+import com.radierdev.keveoq.domain.model.WatchProviders
 import com.radierdev.keveoq.presentation.components.ErrorState
 import com.radierdev.keveoq.presentation.components.LoadingState
 import com.radierdev.keveoq.presentation.components.PosterImage
@@ -133,6 +137,8 @@ fun DetailsScreen(
                 details = uiState.details,
                 action = uiState.action,
                 trailerKey = uiState.trailerKey,
+                isInTheaters = uiState.isInTheaters,
+                watchProvidersLink = uiState.watchProvidersLink,
                 onAddToWatchlist = onAddToWatchlist,
                 onMarkAsWatched = onMarkAsWatched,
                 onRate = onRate,
@@ -148,6 +154,8 @@ private fun DetailsContent(
     details: MovieDetails,
     action: WatchlistAction,
     trailerKey: String?,
+    isInTheaters: Boolean,
+    watchProvidersLink: String?,
     onAddToWatchlist: () -> Unit,
     onMarkAsWatched: () -> Unit,
     onRate: (Int) -> Unit,
@@ -193,6 +201,12 @@ private fun DetailsContent(
             onRate = onRate,
         )
 
+        WhereToWatchSection(
+            providers = details.watchProviders,
+            isInTheaters = isInTheaters,
+            link = watchProvidersLink,
+        )
+
         // Sem trailer válido ou sem conexão, a seção inteira não aparece (RF20, RF21).
         if (trailerKey != null) {
             TrailerSection(trailerKey)
@@ -209,6 +223,115 @@ private fun DetailsContent(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
             )
+        }
+    }
+}
+
+/**
+ * "Onde assistir" (RF27–RF29): selo de cinema, grupos de serviços do Brasil,
+ * atribuição obrigatória ao JustWatch e botão para a página com os links.
+ * Os serviços vêm do banco e aparecem offline; o botão só aparece com conexão.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun WhereToWatchSection(
+    providers: WatchProviders,
+    isInTheaters: Boolean,
+    link: String?,
+) {
+    val uriHandler = LocalUriHandler.current
+
+    Column(verticalArrangement = Arrangement.spacedBy(Dimens.ContentPadding)) {
+        Text(
+            text = stringResource(R.string.where_to_watch_title),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+        if (isInTheaters) {
+            Surface(
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                shape = MaterialTheme.shapes.small,
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = Dimens.ContentPadding, vertical = Dimens.SmallSpacing),
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.SmallSpacing),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_movie),
+                        contentDescription = null,
+                        modifier = Modifier.size(Dimens.IconSmall),
+                    )
+                    Text(stringResource(R.string.where_to_watch_in_theaters), style = MaterialTheme.typography.labelMedium)
+                }
+            }
+        }
+        if (providers.isEmpty) {
+            Text(
+                text = stringResource(R.string.where_to_watch_none),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        } else {
+            ProviderGroup(stringResource(R.string.where_to_watch_subscription), providers.subscription)
+            ProviderGroup(stringResource(R.string.where_to_watch_rent), providers.rent)
+            ProviderGroup(stringResource(R.string.where_to_watch_buy), providers.buy)
+        }
+        Text(
+            text = stringResource(R.string.where_to_watch_attribution),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        if (link != null) {
+            OutlinedButton(onClick = { uriHandler.openUri(link) }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.action_open_justwatch))
+            }
+        }
+    }
+}
+
+/** Um grupo ("Incluso na assinatura", "Alugar", "Comprar"); grupo vazio não aparece. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ProviderGroup(title: String, providers: List<WatchProvider>) {
+    if (providers.isEmpty()) return
+    Column(verticalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing)) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing),
+            verticalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing),
+        ) {
+            providers.forEach { provider -> ProviderChip(provider) }
+        }
+    }
+}
+
+/** Logo e nome do serviço, em `surfaceContainer` com forma `small`. */
+@Composable
+private fun ProviderChip(provider: WatchProvider) {
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceContainer,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        shape = MaterialTheme.shapes.small,
+    ) {
+        Row(
+            modifier = Modifier.padding(end = Dimens.ContentPadding),
+            horizontalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AsyncImage(
+                model = provider.logoUrl,
+                contentDescription = null, // o nome ao lado identifica o serviço
+                modifier = Modifier
+                    .size(Dimens.ProviderLogoSize)
+                    .clip(MaterialTheme.shapes.small),
+            )
+            Text(text = provider.name, style = MaterialTheme.typography.labelMedium)
         }
     }
 }
@@ -353,7 +476,29 @@ private val previewDetails = MovieDetails(
     genres = listOf("Animação", "Família", "Comédia", "Drama"),
     trailerKey = null,
     updatedAt = Instant.EPOCH,
+    watchProviders = WatchProviders(
+        subscription = listOf(WatchProvider(337, "Disney Plus", null)),
+        rent = listOf(WatchProvider(2, "Apple TV", null), WatchProvider(3, "Google Play Filmes", null)),
+        link = "https://www.themoviedb.org/movie/1022789/watch?locale=BR",
+    ),
 )
+
+@PreviewLightDark
+@Composable
+private fun DetailsInTheatersPreview() {
+    KeveOQTheme {
+        DetailsScreen(
+            uiState = DetailsUiState.Success(
+                details = previewDetails,
+                action = WatchlistAction.AddToWatchlist,
+                isInTheaters = true,
+                watchProvidersLink = previewDetails.watchProviders.link,
+            ),
+            snackbarHostState = SnackbarHostState(),
+            onBack = {}, onRetry = {}, onAddToWatchlist = {}, onMarkAsWatched = {}, onRate = {},
+        )
+    }
+}
 
 @PreviewLightDark
 @Composable

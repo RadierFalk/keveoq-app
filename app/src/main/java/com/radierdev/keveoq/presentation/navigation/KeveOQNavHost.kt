@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.radierdev.keveoq.R
+import com.radierdev.keveoq.presentation.screens.mood.MoodRoute
 import com.radierdev.keveoq.presentation.theme.Dimens
 
 /**
@@ -34,7 +35,13 @@ fun KeveOQNavHost(
         startDestination = MoodRoute,
         modifier = modifier,
     ) {
-        composable<MoodRoute> { PendingScreen(stringResource(R.string.screen_mood)) }
+        composable<MoodRoute> {
+            MoodRoute(
+                onSeeMovies = { mood -> navController.navigate(RecommendationsRoute(mood = mood.name)) },
+                onOpenWatchlist = { navController.navigate(WatchlistRoute) },
+                onOpenAbout = { navController.navigate(AboutRoute) },
+            )
+        }
         composable<RecommendationsRoute> { PendingScreen(stringResource(R.string.screen_recommendations)) }
         composable<DetailsRoute> { PendingScreen(stringResource(R.string.screen_details)) }
         composable<WatchlistRoute> { PendingScreen(stringResource(R.string.screen_watchlist)) }

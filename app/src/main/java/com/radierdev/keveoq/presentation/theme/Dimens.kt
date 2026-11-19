@@ -20,5 +20,6 @@ object Dimens {
     val MediumSpacing = 8.dp
     val ContentPadding = 12.dp
     val BorderWidth = 1.dp
+    val SelectedBorderWidth = 2.dp // card de humor selecionado (identidade visual)
     val IconSmall = 18.dp
 }

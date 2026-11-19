@@ -140,7 +140,7 @@
 - **Relacionado:** RF13, RF23 · CA11, CA13, CA32 · Seções 6.6, 7.2, 9
 - **Commit:** `feat: cria navegacao e componentes base`
 
-### [ ] T20 — Tela de seleção de humor
+### [x] T20 — Tela de seleção de humor
 - **Descrição:** `MoodRoute`/`MoodScreen`/`MoodViewModel`: título, grade de 8 cards com dicas, botão "Ver filmes", ícones "Quero assistir" e "Sobre" na barra superior.
 - **Pronto quando:** seleção sobrevive à rotação; "Ver filmes" abre as recomendações do humor; teste do ViewModel passa.
 - **Relacionado:** RF01, RF02, RF24 · CA01, CA34

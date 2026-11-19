@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:52 — T20: tela de seleção de humor
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 188 |
+| Aprovados | 188 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `MoodViewModelTest` | 5 | 8 humores sem seleção inicial (RF01); "Ver filmes" desabilitado até escolher (RF02); seleção guardada e trocada; nome e dica distintos para cada humor |
+
+**Verificação manual:** app instalado em aparelho físico (tema escuro): título, grade com os 8 cards, ícones "Quero assistir" e "Sobre" na barra superior e botão "Ver filmes" desabilitado exibidos corretamente; nenhum erro do app no Logcat.
+
+---
+
 ## 2026-11-19 14:47 — T19: navegação e componentes base
 
 | Item | Valor |

@@ -9,6 +9,29 @@
     <string name="screen_about">Sobre</string>
     <string name="screen_pending">Esta tela ainda está em construção.</string>
 
+    <!-- Humores: nome e dica (seção 9.2 do planejamento) -->
+    <string name="mood_happy">Feliz</string>
+    <string name="mood_happy_hint">Comédias e animações para manter o astral</string>
+    <string name="mood_sad">Triste</string>
+    <string name="mood_sad_hint">Dramas e romances para sentir junto</string>
+    <string name="mood_excited">Animado</string>
+    <string name="mood_excited_hint">Ação e aventura para gastar energia</string>
+    <string name="mood_anxious">Ansioso</string>
+    <string name="mood_anxious_hint">Histórias leves, sem sustos</string>
+    <string name="mood_bored">Entediado</string>
+    <string name="mood_bored_hint">Mistério e ficção para prender a atenção</string>
+    <string name="mood_romantic">Romântico</string>
+    <string name="mood_romantic_hint">Romances para aquecer o coração</string>
+    <string name="mood_nostalgic">Nostálgico</string>
+    <string name="mood_nostalgic_hint">Aventuras clássicas de antes dos anos 2000</string>
+    <string name="mood_brave">Corajoso</string>
+    <string name="mood_brave_hint">Terror e suspense para quem aguenta</string>
+
+    <!-- Tela de humor -->
+    <string name="action_see_movies">Ver filmes</string>
+    <string name="action_open_watchlist">Quero assistir</string>
+    <string name="action_open_about">Sobre</string>
+
     <!-- Conexão -->
     <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
 

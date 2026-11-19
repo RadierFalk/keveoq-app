@@ -152,6 +152,8 @@ Pelo Android Studio, selecione o módulo `app` e clique em **Run**. Pelo termina
 
 O APK de depuração é gerado em `app/build/outputs/apk/debug/app-debug.apk`.
 
+**APK de entrega:** [`entrega/app-debug.apk`](entrega/app-debug.apk), gerado na execução final de 2026-11-19 (build limpo, 263 testes aprovados). Para instalar, copie o arquivo para um aparelho com Android 8.0 ou superior e permita a instalação de fontes desconhecidas, ou use `adb install entrega/app-debug.apk`. Este APK já contém a chave do TMDB usada no desenvolvimento.
+
 ## Testes
 
 Os testes unitários rodam na JVM, sem emulador:

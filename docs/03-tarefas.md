@@ -226,7 +226,7 @@
 - **Relacionado:** RNF10 · todos os CA
 - **Commit:** `test: registra execucao final dos testes e evidencias`
 
-### [ ] T29 — APK de entrega
+### [x] T29 — APK de entrega
 - **Descrição:** com sua autorização, gerar o APK de depuração e copiá-lo para `entrega/`.
 - **Pronto quando:** `entrega/app-debug.apk` instala e abre em um aparelho limpo.
 - **Relacionado:** entrega acadêmica

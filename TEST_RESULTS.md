@@ -29,7 +29,7 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 `DomainModuleTest` passou a conferir também o `IsInTheatersUseCase`.
 
-**Pendente:** verificação visual da seção e da migração do banco no aparelho (desconectado nesta execução).
+**Verificação manual:** feita pelo responsável do projeto no aparelho físico em 2026-11-19: a seção "Onde assistir" aparece nos detalhes e funciona conforme esperado.
 
 ---
 
@@ -55,7 +55,7 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 | `MovieRepositoryImplTest` | +1 | Detalhes pedem `release_dates,watch/providers` numa única requisição |
 | `LocalMappersTest` | (ampliado) | Detalhes com serviços e estreia vão e voltam do banco sem perda |
 
-**Pendente:** verificação no aparelho de que a migração 1 → 2 preserva a lista "Quero assistir" (o aparelho estava desconectado nesta execução). O Room validou o esquema na compilação (KSP), mas a migração em si só roda no Android.
+**Verificação manual:** feita pelo responsável do projeto no aparelho físico em 2026-11-19, após atualizar o app sem desinstalá-lo: a migração 1 → 2 rodou e a lista "Quero assistir" foi preservada. O Room já havia validado o esquema na compilação (KSP).
 
 ---
 

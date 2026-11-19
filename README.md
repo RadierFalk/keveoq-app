@@ -177,7 +177,27 @@ Os testes usam **fakes** (classes simples em memória) para repositórios, API e
 ## Evidências
 
 - **Testes:** o histórico de cada execução, com data, comando, total, aprovados, falhas e correções aplicadas, está em [`TEST_RESULTS.md`](TEST_RESULTS.md). Ele registra também as falhas encontradas pelos testes durante o desenvolvimento e como foram corrigidas.
-- **Capturas de tela:** as capturas do app online e offline serão reunidas na pasta `evidencias/` e referenciadas aqui na etapa final de validação (tarefa T28).
+- **Critérios de aceite:** a execução final em `TEST_RESULTS.md` mostra, para cada um dos 41 critérios, o teste automatizado e/ou a captura que o comprova, e quais ainda dependem de verificação manual.
+- **Capturas de tela:** 18 capturas do app em um aparelho físico, em [`evidencias/`](evidencias/):
+
+| # | Com internet | # | Com internet |
+|---|---|---|---|
+| 01 | [Tela inicial, tema escuro](evidencias/01-online-humor-tema-escuro.jpg) | 08 | [Avaliação com estrelas](evidencias/08-online-detalhes-avaliacao.jpg) |
+| 02 | [Tela inicial, tema claro](evidencias/02-online-humor-tema-claro.jpg) | 09 | [Tela "Sobre"](evidencias/09-online-sobre.jpg) |
+| 03 | [Humor selecionado](evidencias/03-online-humor-selecionado.jpg) | 10 | [Lista: todos](evidencias/10-online-lista-todos.jpg) |
+| 04 | [Recomendações de "Feliz"](evidencias/04-online-recomendacoes-feliz.jpg) | 11 | [Lista: filtro vazio](evidencias/11-online-lista-filtro-vazio.jpg) |
+| 05 | [Detalhes e "Onde assistir"](evidencias/05-online-detalhes-onde-assistir.jpg) | 12 | [Lista: assistidos](evidencias/12-online-lista-filtro-assistidos.jpg) |
+| 06 | [Trailer e sinopse](evidencias/06-online-detalhes-trailer-sinopse.jpg) | 13 | [Lista: quero assistir](evidencias/13-online-lista-filtro-quero-assistir.jpg) |
+| 07 | [Filme salvo: "Já assisti"](evidencias/07-online-detalhes-ja-assisti.jpg) | 14 | ["Me surpreenda" sorteando](evidencias/14-online-me-surpreenda-sorteando.jpg) |
+
+| # | Sem internet (modo avião) |
+|---|---|
+| 15 | [Tela inicial com o banner "Sem internet"](evidencias/15-offline-tela-inicial-banner.jpg) |
+| 16 | [Recomendações salvas, com "Atualizado há…" e marcador de pôster indisponível](evidencias/16-offline-recomendacoes-cache.jpg) |
+| 17 | [Humor sem cache: erro com "Tentar novamente"](evidencias/17-offline-sem-cache-erro.jpg) |
+| 18 | [Lista "Quero assistir" com avaliações](evidencias/18-offline-lista-quero-assistir.jpg) |
+
+<img src="evidencias/02-online-humor-tema-claro.jpg" alt="Tela inicial" width="200"> <img src="evidencias/05-online-detalhes-onde-assistir.jpg" alt="Detalhes" width="200"> <img src="evidencias/15-offline-tela-inicial-banner.jpg" alt="Offline" width="200">
 
 ## Limitações conhecidas
 

@@ -7,6 +7,73 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 16:53 — T28: execução final dos testes e evidências
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew clean testDebugUnitTest assembleDebug` (build limpo, sem cache) |
+| Total | 263 |
+| Aprovados | 263 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Classes de teste | 36 |
+| Build | `assembleDebug` concluído; `app/build/outputs/apk/debug/app-debug.apk` (16,1 MB) |
+| Correções aplicadas | Nenhuma |
+
+**Por camada:** Domain 115 testes (16 classes), Data 82 (10), Presentation 60 (8), Notification 5 (1), DI 1 (1).
+
+### Critérios de aceite: como cada um foi verificado
+
+Legenda: **T** = teste automatizado; **E** = captura em `evidencias/`; **M** = verificação manual no aparelho físico, sem captura.
+
+| CA | Verificação |
+|---|---|
+| CA01 — humor abre recomendações | T `MoodViewModelTest`; E 03, 04 |
+| CA02 — Ansioso: gêneros, exclusões e 100 votos | T `MoodCriteriaMapperTest`, `RemoteMappersTest`, `RefreshRecommendationsUseCaseTest` |
+| CA03 — Nostálgico até 31/12/1999 | T `MoodCriteriaMapperTest`, `RemoteMappersTest` |
+| CA04 — assistido não aparece | T `RecommendationRulesTest`, `ObserveRecommendationsUseCaseTest`, `RecommendationsViewModelTest` |
+| CA05 — sem duplicados | T `RecommendationRulesTest`, `MovieRepositoryImplTest` |
+| CA06 — cache válido não chama a API | T `RefreshRecommendationsUseCaseTest`, `MovieRepositoryImplTest`, `RecommendationsViewModelTest` |
+| CA07 — cache expirado é atualizado | T `RefreshRecommendationsUseCaseTest`, `MovieRepositoryImplTest` |
+| CA08 — pull-to-refresh força a busca | T `RefreshRecommendationsUseCaseTest`, `RecommendationsViewModelTest` |
+| CA09 — falha com cache mantém filmes + Snackbar | T `MovieRepositoryImplTest`, `RecommendationsViewModelTest`; E 16 |
+| CA10 — sem cache e sem conexão: erro + "Tentar novamente" | T `RecommendationsViewModelTest`; E 17 |
+| CA11 — banner "sem internet" | T `KeveOQAppViewModelTest`; E 15–18 |
+| CA12 — detalhes já abertos funcionam offline | T `DetailsViewModelTest`; M |
+| CA13 — mensagens em português, sem termos técnicos | T `ErrorMessageMapperTest`; E 17 |
+| CA14 — detalhes completos | T `DetailsViewModelTest`; E 05 |
+| CA15 — trailer "Trailer", oficial primeiro | T `TrailerSelectorTest`, `DetailsViewModelTest`; E 06 |
+| CA16 — trailer em inglês como alternativa | T `RefreshMovieDetailsUseCaseTest` |
+| CA17 — sem trailer válido, sem seção | T `TrailerSelectorTest`, `DetailsViewModelTest` |
+| CA18 — offline, sem seção de trailer | T `DetailsViewModelTest` |
+| CA19 — erro do player mostra "Assistir no YouTube" | Implementado; não testável na JVM e não reproduzido no aparelho (depende de um vídeo bloqueado para incorporação) |
+| CA20 — salvar sem duplicar | T `WatchlistUseCasesTest`, `SavedMovieRepositoryImplTest`, `DetailsViewModelTest`; E 07 |
+| CA21 — filtro por status | T `WatchlistUseCasesTest`, `WatchlistViewModelTest`; E 10–13 |
+| CA22 — marcar como assistido, sem volta | T `WatchlistUseCasesTest`, `WatchlistViewModelTest`; E 08, 12 |
+| CA23 — avaliar não assistido é rejeitado | T `WatchlistUseCasesTest` |
+| CA24 — nota 4 → 2; 0 e 6 rejeitados | T `RatingRulesTest`, `WatchlistUseCasesTest`, `DetailsViewModelTest`; E 08 |
+| CA25 — lista offline com avaliações | T `WatchlistViewModelTest`; E 18 |
+| CA26 — lista vazia com ação | T `WatchlistViewModelTest`; E 11 |
+| CA27 — atribuição exata ao TMDB | T `AboutViewModelTest`; E 09 |
+| CA28 — permissão pedida na primeira abertura | M parcial: no aparelho a permissão já estava concedida, então o pedido não apareceu (comportamento esperado); o pedido em si não foi reproduzido em instalação nova |
+| CA29 — janela das 19h às 21h | T `NotificationWindowTest`, `CalculateNotificationDelayUseCaseTest`, `NotificationSchedulerTest` |
+| CA30 — um único agendamento | T `NotificationSchedulerTest`; M (`dumpsys jobscheduler`: 1 trabalho após 3 aberturas, previsto para as 19h) |
+| CA31 — tocar na notificação abre a seleção de humor | Implementado; **pendente** de verificação: a primeira notificação está agendada para a janela das 19h |
+| CA32 — "Atualizado há…" | T `UpdatedAtFormatterTest`, `RecommendationsViewModelTest`; E 16 |
+| CA33 — páginas 1 e 2 | T `MovieRepositoryImplTest` |
+| CA34 — ícones da barra superior | E 01, 02; M |
+| CA35 — "Me surpreenda" abre um filme não assistido | T `PickRandomMovieUseCaseTest`, `MoodViewModelTest`; E 14 |
+| CA36 — sorteio offline com cache | T `PickRandomMovieUseCaseTest` |
+| CA37 — sem filme para sortear: aviso | T `PickRandomMovieUseCaseTest`, `MoodViewModelTest` |
+| CA38 — grupos de "onde assistir" | T `WatchProvidersMapperTest`, `DetailsViewModelTest`; E 05 |
+| CA39 — filme sem serviços | T `WatchProvidersMapperTest` |
+| CA40 — selo "em cartaz" (10 × 60 dias) | T `TheatricalRuleTest`, `DetailsViewModelTest` |
+| CA41 — onde assistir offline, sem botão | T `DetailsViewModelTest`; M |
+
+**Evidências:** 18 capturas em `evidencias/`, feitas pelo responsável do projeto em 2026-11-19, entre 16h39 e 16h45, em aparelho físico: 14 com internet (01–14) e 4 em modo avião (15–18). A captura 16 também mostra a limitação documentada dos pôsteres nunca carregados offline (marcador no lugar da imagem).
+
+---
+
 ## 2026-11-19 15:55 — T26D: seção "Onde assistir" nos detalhes
 
 | Item | Valor |

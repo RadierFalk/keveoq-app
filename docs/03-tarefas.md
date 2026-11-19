@@ -220,7 +220,7 @@
 - **Relacionado:** RNF11, RNF12
 - **Commit:** `docs: completa readme do projeto`
 
-### [ ] T28 — Execução final dos testes e evidências
+### [x] T28 — Execução final dos testes e evidências
 - **Descrição:** rodar `./gradlew testDebugUnitTest` e `./gradlew assembleDebug`, registrar em `TEST_RESULTS.md`; percorrer os critérios de aceite manualmente; organizar e referenciar em `evidencias/` as capturas online e offline feitas por você.
 - **Pronto quando:** todos os testes passam, o relatório reflete a execução real e as evidências estão referenciadas no README.
 - **Relacionado:** RNF10 · todos os CA

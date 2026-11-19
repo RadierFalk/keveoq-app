@@ -64,7 +64,7 @@
 - **Relacionado:** RF03, RN01, RN02 · CA02, CA03
 - **Commit:** `feat: implementa mapeamento de humor para generos`
 
-### [ ] T08 — Regras de recomendação e de cache
+### [x] T08 — Regras de recomendação e de cache
 - **Descrição:** `RecommendationRules` (duplicados, assistidos, mínimo de votos, mantendo a ordem) e `CachePolicy` (24 h, com relógio fixo nos testes).
 - **Pronto quando:** testes passam, incluindo os limites de 23 h 59 min, 24 h e 25 h.
 - **Relacionado:** RN02, RN03, RN04, RN05 · CA04–CA07

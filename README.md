@@ -53,4 +53,8 @@ Os testes unitários rodam na JVM, sem emulador:
 
 O relatório HTML fica em `app/build/reports/tests/testDebugUnitTest/index.html`, e o histórico das execuções está em [`TEST_RESULTS.md`](TEST_RESULTS.md).
 
-Cobertura atual: mapeamento de cada humor para os critérios de busca do TMDB (gêneros, exclusões, data limite e mínimo de 100 votos).
+Cobertura atual:
+
+- mapeamento de cada humor para os critérios de busca do TMDB (gêneros, exclusões, data limite e mínimo de 100 votos);
+- regras de recomendação: mínimo de votos, remoção de filmes assistidos e de duplicados, mantendo a ordem;
+- validade de 24 horas do cache de recomendações, testada com relógio fixo.

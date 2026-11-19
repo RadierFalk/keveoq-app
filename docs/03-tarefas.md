@@ -58,7 +58,7 @@
 - **Relacionado:** RNF02 · Seções 2.3, 2.4
 - **Commit:** `feat: cria modelos de dominio`
 
-### [ ] T07 — Mapeamento humor → critérios
+### [x] T07 — Mapeamento humor → critérios
 - **Descrição:** `MoodCriteriaMapper` com a tabela do `CLAUDE.md` e mínimo de 100 votos. Testes unitários para os 8 humores. Criar o `TEST_RESULTS.md` com a primeira execução registrada.
 - **Pronto quando:** testes passam e cobrem Ansioso (exclusões) e Nostálgico (data).
 - **Relacionado:** RF03, RN01, RN02 · CA02, CA03

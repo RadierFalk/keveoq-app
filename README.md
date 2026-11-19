@@ -42,3 +42,15 @@ Pelo Android Studio, selecione o módulo `app` e clique em **Run**. Pelo termina
 ```
 
 O APK de depuração é gerado em `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Testes
+
+Os testes unitários rodam na JVM, sem emulador:
+
+```bash
+./gradlew testDebugUnitTest
+```
+
+O relatório HTML fica em `app/build/reports/tests/testDebugUnitTest/index.html`, e o histórico das execuções está em [`TEST_RESULTS.md`](TEST_RESULTS.md).
+
+Cobertura atual: mapeamento de cada humor para os critérios de busca do TMDB (gêneros, exclusões, data limite e mínimo de 100 votos).

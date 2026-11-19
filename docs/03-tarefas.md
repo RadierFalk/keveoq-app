@@ -108,7 +108,7 @@
 
 ## Data
 
-### [ ] T15 — API do TMDB
+### [x] T15 — API do TMDB
 - **Descrição:** `TmdbApi` (discover, details, videos), DTOs com kotlinx.serialization, `AuthInterceptor` (Bearer), `logging-interceptor` só em debug com `Authorization` ocultado, `safeApiCall` e mappers DTO → domínio; registrar no `dataModule`.
 - **Pronto quando:** testes de `safeApiCall` (cada exceção → `AppError`, `CancellationException` relançada) e dos mappers (URL do pôster, ano, `with_genres` com `|`) passam.
 - **Relacionado:** RNF04, RNF09 · Seções 3, 7.1

@@ -7,6 +7,30 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:28 — T15: cliente da API do TMDB
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 129 |
+| Aprovados | 129 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas (camada data):**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `SafeApiCallTest` | 9 | Sucesso; `IOException` e timeout → `Network`; 401, 404 e 500 → `Http(code)`; `SerializationException` → `Serialization`; outra exceção → `Unknown`; `CancellationException` relançada |
+| `RemoteMappersTest` | 14 | URL do pôster e pôster ausente; ano a partir da data e data vazia; filme, detalhes (gêneros, sinopse e duração ausentes) e vídeo; `with_genres` com `\|`, `without_genres` com `,` ou nulo; data ISO do Nostálgico; mínimo de votos |
+| `TmdbJsonParsingTest` | 3 | Leitura de JSON no formato do TMDB com campos desconhecidos e valores nulos (discover, detalhes e vídeos) |
+| `AuthInterceptorTest` | 2 | Token no cabeçalho `Authorization: Bearer`; token fora da URL |
+
+Nenhum teste faz requisição real à API.
+
+---
+
 ## 2026-11-19 14:21 — Correção: falhas do banco como `AppResult` na lista "Quero assistir"
 
 | Item | Valor |

@@ -4,6 +4,7 @@ import com.radierdev.keveoq.presentation.KeveOQAppViewModel
 import com.radierdev.keveoq.presentation.screens.details.DetailsViewModel
 import com.radierdev.keveoq.presentation.screens.mood.MoodViewModel
 import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsViewModel
+import com.radierdev.keveoq.presentation.screens.watchlist.WatchlistViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -12,6 +13,7 @@ import org.koin.dsl.module
 val presentationModule = module {
     viewModelOf(::KeveOQAppViewModel)
     viewModelOf(::MoodViewModel)
+    viewModelOf(::WatchlistViewModel)
 
     // O humor vem da rota de navegação, passado pela tela com parametersOf(mood).
     viewModel { params ->

@@ -24,6 +24,7 @@ import com.radierdev.keveoq.presentation.theme.Dimens
 import com.radierdev.keveoq.presentation.screens.details.DetailsRoute as DetailsScreenRoute
 import com.radierdev.keveoq.presentation.screens.mood.MoodRoute as MoodScreenRoute
 import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsRoute as RecommendationsScreenRoute
+import com.radierdev.keveoq.presentation.screens.watchlist.WatchlistRoute as WatchlistScreenRoute
 
 /**
  * Grafo de navegação do app. Começa na seleção de humor.
@@ -64,7 +65,14 @@ fun KeveOQNavHost(
                 onBack = { navController.popBackStack() },
             )
         }
-        composable<WatchlistRoute> { PendingScreen(stringResource(R.string.screen_watchlist)) }
+        composable<WatchlistRoute> {
+            WatchlistScreenRoute(
+                onBack = { navController.popBackStack() },
+                onMovieClick = { movieId -> navController.navigate(DetailsRoute(movieId = movieId)) },
+                // Volta para a tela inicial, que já está na pilha.
+                onChooseMood = { navController.popBackStack(MoodRoute, inclusive = false) },
+            )
+        }
         composable<AboutRoute> { PendingScreen(stringResource(R.string.screen_about)) }
     }
 }

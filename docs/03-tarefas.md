@@ -164,7 +164,7 @@
 - **Relacionado:** RF20–RF22 · CA15, CA18, CA19
 - **Commit:** `feat: adiciona trailer na tela de detalhes`
 
-### [ ] T24 — Tela "Quero assistir"
+### [x] T24 — Tela "Quero assistir"
 - **Descrição:** `WatchlistRoute`/`Screen`/`ViewModel`: chips de filtro, itens com "Já assisti" ou estrelas, estado vazio com "Escolher um humor".
 - **Pronto quando:** testes do ViewModel cobrem filtro, Empty e Success; a lista funciona offline.
 - **Relacionado:** RF09–RF12, RF23 · CA21–CA26

@@ -50,6 +50,18 @@
     <string name="message_already_in_list">Este filme já está na sua lista.</string>
     <string name="error_save">Não foi possível salvar a alteração. Tente novamente.</string>
 
+    <!-- Quero assistir -->
+    <string name="filter_all">Todos</string>
+    <string name="filter_want_to_watch">Quero assistir</string>
+    <string name="filter_watched">Assistidos</string>
+    <string name="status_want_to_watch">Quero assistir</string>
+    <string name="status_watched">Assistido</string>
+    <string name="watchlist_empty">Sua lista está vazia.</string>
+    <string name="watchlist_empty_want_to_watch">Nenhum filme esperando para ser assistido.</string>
+    <string name="watchlist_empty_watched">Você ainda não marcou nenhum filme como assistido.</string>
+    <string name="action_choose_mood">Escolher um humor</string>
+    <string name="error_watchlist">Não foi possível abrir sua lista. Tente novamente.</string>
+
     <!-- Conexão -->
     <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
 

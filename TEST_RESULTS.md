@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:15 — T24: tela "Quero assistir"
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 218 |
+| Aprovados | 218 |
+| Falhas | 0 (na execução final) |
+| Ignorados | 0 |
+| Correções aplicadas | Execução anterior, no mesmo minuto: 218 testes, 1 falha (`marcar como assistido deve mover o filme para assistidos`, por tempo esgotado). Era erro do teste: o filtro era trocado antes de a lista "Todos" ser emitida. A ordem das etapas do teste foi corrigida; o código do app não mudou |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `WatchlistViewModelTest` | 7 | Loading → Empty (CA26); Loading → Success, do mais recente ao mais antigo; filtros Todos, Quero assistir e Assistidos (CA21); filtro sem filmes → Empty; marcar como assistido move o filme de filtro (CA22); trocar a nota (CA24); falha ao salvar → Snackbar |
+
+A lista usa apenas o banco local; não depende de conexão (CA25).
+
+---
+
 ## 2026-11-19 15:09 — T23: trailer na tela de detalhes
 
 | Item | Valor |

@@ -7,6 +7,28 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:37 — T16: banco de dados local (Room)
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 139 |
+| Aprovados | 139 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `ConvertersTest` | 4 | Gêneros gravados e lidos como JSON; lista vazia; acentos e aspas |
+| `LocalMappersTest` | 6 | DTO → entidade; recomendações com posição e data; linhas do banco → recomendações ordenadas; cache vazio sem data; detalhes e filme salvo vão e voltam sem perda |
+
+O KSP gerou `AppDatabase_Impl`, `MovieDao_Impl` e `SavedMovieDao_Impl` sem erros. O banco real (Room em aparelho) não é testado automaticamente: testes instrumentados estão fora do escopo.
+
+---
+
 ## 2026-11-19 14:28 — T15: cliente da API do TMDB
 
 | Item | Valor |

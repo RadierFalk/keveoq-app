@@ -64,4 +64,5 @@ Cobertura atual:
 - casos de uso de recomendações, com repositórios falsos: uso do cache válido sem chamar a API, atualização com cache vazio ou expirado, pull-to-refresh, erro de rede quando offline e remoção imediata de filmes marcados como assistidos;
 - casos de uso de detalhes: validade de 24 horas, trailer em português com alternativa em inglês e atualização "tudo ou nada" em caso de falha;
 - casos de uso da lista "Quero assistir": adicionar sem duplicar, marcar como assistido, avaliar (só assistidos, de 1 a 5) e filtrar por status;
-- cliente da API do TMDB: conversão de cada tipo de falha de rede em erro do app, leitura do JSON da API, conversão para os modelos do app e envio do token apenas no cabeçalho.
+- cliente da API do TMDB: conversão de cada tipo de falha de rede em erro do app, leitura do JSON da API, conversão para os modelos do app e envio do token apenas no cabeçalho;
+- banco local: gravação dos gêneros como JSON e conversão entre as tabelas e os modelos do app.

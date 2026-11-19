@@ -1,12 +1,15 @@
 package com.radierdev.keveoq.di
 
+import androidx.room.Room
 import com.radierdev.keveoq.BuildConfig
+import com.radierdev.keveoq.data.local.AppDatabase
 import com.radierdev.keveoq.data.remote.AuthInterceptor
 import com.radierdev.keveoq.data.remote.TmdbApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -49,4 +52,13 @@ val dataModule = module {
     }
 
     single<TmdbApi> { get<Retrofit>().create(TmdbApi::class.java) }
+
+    single {
+        Room.databaseBuilder(androidContext(), AppDatabase::class.java, AppDatabase.NAME)
+            // Sem migrações: se o esquema mudar em desenvolvimento, o banco é recriado.
+            .fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
+    }
+    single { get<AppDatabase>().movieDao() }
+    single { get<AppDatabase>().savedMovieDao() }
 }

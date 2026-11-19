@@ -114,7 +114,7 @@
 - **Relacionado:** RNF04, RNF09 · Seções 3, 7.1
 - **Commit:** `feat: implementa cliente da api do tmdb`
 
-### [ ] T16 — Banco Room
+### [x] T16 — Banco Room
 - **Descrição:** `AppDatabase` (v1), entidades `movies`, `movie_details`, `mood_recommendations`, `saved_movies`, `MovieDao`, `SavedMovieDao`, `Converters` (gêneros em JSON) e mappers entidade ↔ domínio; registrar no `dataModule`.
 - **Pronto quando:** compila (KSP gera o código do Room) e os testes dos mappers e do `Converters` passam.
 - **Relacionado:** RNF01 · Seção 5

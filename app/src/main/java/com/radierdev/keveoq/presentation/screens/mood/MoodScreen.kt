@@ -19,18 +19,26 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -48,28 +56,48 @@ fun MoodRoute(
     onSeeMovies: (Mood) -> Unit,
     onOpenWatchlist: () -> Unit,
     onOpenAbout: () -> Unit,
+    onOpenMovie: (Int) -> Unit,
     viewModel: MoodViewModel = koinViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+    val currentOnOpenMovie by rememberUpdatedState(onOpenMovie)
+
+    // Eventos únicos do sorteio: abrir o filme ou avisar que não há filme.
+    LaunchedEffect(viewModel) {
+        viewModel.events.collect { event ->
+            when (event) {
+                is MoodEvent.OpenMovie -> currentOnOpenMovie(event.movieId)
+                is MoodEvent.ShowMessage -> snackbarHostState.showSnackbar(context.getString(event.messageRes))
+            }
+        }
+    }
+
     MoodScreen(
         uiState = uiState,
+        snackbarHostState = snackbarHostState,
         onMoodSelected = viewModel::onMoodSelected,
         onSeeMovies = { uiState.selectedMood?.let(onSeeMovies) },
+        onSurpriseMe = viewModel::onSurpriseMe,
         onOpenWatchlist = onOpenWatchlist,
         onOpenAbout = onOpenAbout,
     )
 }
 
 /**
- * Tela inicial (RF01, RF02, RF24): "Como você está hoje?", grade com os 8 humores
- * e o botão "Ver filmes", habilitado só após a seleção. Sem estado próprio.
+ * Tela inicial (RF01, RF02, RF24, RF25): "Como você está hoje?", grade com os 8 humores,
+ * o botão "Me surpreenda" (sorteio) e "Ver filmes", habilitado só após a seleção.
+ * Sem estado próprio.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoodScreen(
     uiState: MoodUiState,
+    snackbarHostState: SnackbarHostState,
     onMoodSelected: (Mood) -> Unit,
     onSeeMovies: () -> Unit,
+    onSurpriseMe: () -> Unit,
     onOpenWatchlist: () -> Unit,
     onOpenAbout: () -> Unit,
     modifier: Modifier = Modifier,
@@ -77,6 +105,7 @@ fun MoodScreen(
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {
@@ -110,15 +139,21 @@ fun MoodScreen(
             )
         },
         bottomBar = {
-            Button(
-                onClick = onSeeMovies,
-                enabled = uiState.canSeeMovies,
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
                     .padding(horizontal = Dimens.ScreenHorizontalPadding, vertical = Dimens.ItemSpacing),
+                verticalArrangement = Arrangement.spacedBy(Dimens.MediumSpacing),
             ) {
-                Text(stringResource(R.string.action_see_movies))
+                SurpriseMeButton(isPicking = uiState.isPickingRandom, onClick = onSurpriseMe)
+                Button(
+                    onClick = onSeeMovies,
+                    enabled = uiState.canSeeMovies,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.action_see_movies))
+                }
             }
         },
     ) { innerPadding ->
@@ -150,6 +185,37 @@ fun MoodScreen(
                 )
             }
         }
+    }
+}
+
+/**
+ * Botão secundário "Me surpreenda" (`OutlinedButton`, identidade visual).
+ * Durante o sorteio troca o ícone de dado por um indicador e o texto por
+ * "Sorteando um filme…", e fica desabilitado para não aceitar novos toques (RF26).
+ */
+@Composable
+private fun SurpriseMeButton(isPicking: Boolean, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        enabled = !isPicking,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        if (isPicking) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(Dimens.IconSmall),
+                strokeWidth = Dimens.ProgressStrokeWidth,
+            )
+        } else {
+            Icon(
+                painter = painterResource(R.drawable.ic_casino),
+                contentDescription = null, // o texto do botão já descreve a ação
+                modifier = Modifier.size(Dimens.IconSmall),
+            )
+        }
+        Text(
+            text = stringResource(if (isPicking) R.string.picking_random_movie else R.string.action_surprise_me),
+            modifier = Modifier.padding(start = Dimens.MediumSpacing),
+        )
     }
 }
 
@@ -199,10 +265,8 @@ private fun MoodScreenPreview() {
     KeveOQTheme {
         MoodScreen(
             uiState = MoodUiState(moods = Mood.entries, selectedMood = Mood.SAD),
-            onMoodSelected = {},
-            onSeeMovies = {},
-            onOpenWatchlist = {},
-            onOpenAbout = {},
+            snackbarHostState = SnackbarHostState(),
+            onMoodSelected = {}, onSeeMovies = {}, onSurpriseMe = {}, onOpenWatchlist = {}, onOpenAbout = {},
         )
     }
 }
@@ -213,10 +277,20 @@ private fun MoodScreenNoSelectionPreview() {
     KeveOQTheme {
         MoodScreen(
             uiState = MoodUiState(moods = Mood.entries),
-            onMoodSelected = {},
-            onSeeMovies = {},
-            onOpenWatchlist = {},
-            onOpenAbout = {},
+            snackbarHostState = SnackbarHostState(),
+            onMoodSelected = {}, onSeeMovies = {}, onSurpriseMe = {}, onOpenWatchlist = {}, onOpenAbout = {},
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun MoodScreenPickingRandomPreview() {
+    KeveOQTheme {
+        MoodScreen(
+            uiState = MoodUiState(moods = Mood.entries, isPickingRandom = true),
+            snackbarHostState = SnackbarHostState(),
+            onMoodSelected = {}, onSeeMovies = {}, onSurpriseMe = {}, onOpenWatchlist = {}, onOpenAbout = {},
         )
     }
 }

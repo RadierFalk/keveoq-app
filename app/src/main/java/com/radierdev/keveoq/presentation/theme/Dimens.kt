@@ -23,4 +23,5 @@ object Dimens {
     val SelectedBorderWidth = 2.dp // card de humor selecionado (identidade visual)
     val IconSmall = 18.dp
     val LogoSize = 32.dp // logo do app na barra da tela inicial
+    val ProgressStrokeWidth = 2.dp // indicador pequeno dentro de botões
 }

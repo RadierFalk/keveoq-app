@@ -7,6 +7,30 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:44 — T26B: botão "Me surpreenda"
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 236 |
+| Aprovados | 236 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Testes novos em `MoodViewModelTest`** (+4, total 9):
+
+| Teste | Cobre |
+|---|---|
+| me surpreenda deve abrir os detalhes do filme sorteado | RF25, CA35 |
+| sem filme para sortear deve mostrar mensagem e continuar na tela | RF26, CA37 |
+| indicador deve ficar ligado durante o sorteio e desligar ao terminar | RF26 |
+| toques repetidos durante o sorteio devem ser ignorados | RF26 |
+
+**Verificação manual:** app instalado em aparelho físico; o botão "Me surpreenda", com o ícone de dado, aparece acima de "Ver filmes" na tela inicial.
+
+---
+
 ## 2026-11-19 15:41 — T26A: caso de uso do sorteio de filme
 
 | Item | Valor |

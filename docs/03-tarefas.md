@@ -192,7 +192,7 @@
 - **Relacionado:** RF25, RN12 · CA35–CA37 · Seção 2.4, decisão 15
 - **Commit:** `feat: cria caso de uso do sorteio de filme`
 
-### [ ] T26B — Botão "Me surpreenda"
+### [x] T26B — Botão "Me surpreenda"
 - **Descrição:** ícone `ic_casino` (Material Icons); `OutlinedButton` "Me surpreenda" acima de "Ver filmes"; `MoodViewModel` com `isPickingRandom` e eventos únicos (abrir detalhes ou Snackbar "não há filmes para sortear"); Snackbar na tela de humor; navegação para os detalhes.
 - **Pronto quando:** testes do ViewModel cobrem: navegação para o filme sorteado, Snackbar sem filme, indicador ligado durante o sorteio e toque ignorado enquanto sorteia; previews claro/escuro atualizados; verificado no aparelho online e offline.
 - **Relacionado:** RF25, RF26 · CA35–CA37 · Seção 9.2

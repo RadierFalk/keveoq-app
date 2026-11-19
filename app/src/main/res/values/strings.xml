@@ -33,6 +33,9 @@
 
     <!-- Tela de humor -->
     <string name="action_see_movies">Ver filmes</string>
+    <string name="action_surprise_me">Me surpreenda</string>
+    <string name="picking_random_movie">Sorteando um filme…</string>
+    <string name="message_no_random_movie">Não há filmes para sortear agora. Conecte-se à internet e tente de novo.</string>
     <string name="action_open_watchlist">Quero assistir</string>
     <string name="action_open_about">Sobre</string>
 

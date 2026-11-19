@@ -31,6 +31,7 @@ fun KeveOQNavHost(
                 onSeeMovies = { mood -> navController.navigate(RecommendationsRoute(mood = mood.name)) },
                 onOpenWatchlist = { navController.navigate(WatchlistRoute) },
                 onOpenAbout = { navController.navigate(AboutRoute) },
+                onOpenMovie = { movieId -> navController.navigate(DetailsRoute(movieId = movieId)) },
             )
         }
         composable<RecommendationsRoute> { backStackEntry ->

@@ -11,6 +11,7 @@ Em implementação. Este README descreve apenas o que já existe e é atualizado
 ## Funcionalidades implementadas
 
 - **Seleção de humor (tela inicial):** a pergunta "Como você está hoje?" e oito humores em cards com uma dica de gênero. O botão "Ver filmes" é habilitado ao escolher um humor, e a escolha é mantida ao girar o aparelho. A barra superior tem atalhos para "Quero assistir" e "Sobre".
+- **Sorteio de filme ("Me surpreenda"):** para quem não quer escolher um humor, o botão sorteia um humor, pega as recomendações dele (salvas ou da internet) e abre os detalhes de um filme aleatório que ainda não foi assistido. Sem internet, sorteia entre os humores que já têm filmes salvos; se não houver nenhum, avisa.
 - **Recomendações por humor:** lista de filmes do TMDB (pôster, título, ano e nota) para o humor escolhido, sem filmes já assistidos nem repetidos, com "Atualizado há…". Os dados ficam salvos no aparelho e valem 24 horas; puxar a lista para baixo força uma nova busca. Sem internet, a lista salva continua aparecendo e um aviso informa a falha; sem lista salva e sem internet, aparece uma mensagem com "Tentar novamente".
 - **Detalhes do filme:** pôster, título, ano, duração, nota, gêneros e sinopse. Os detalhes ficam salvos no aparelho ao serem abertos, para consulta sem internet. Conforme a situação do filme, a tela oferece "Quero assistir", "Já assisti" ou as estrelas para avaliar (1 a 5, podendo trocar a nota).
 - **Trailer:** com internet, os detalhes mostram o trailer do filme num player do YouTube incorporado (prioridade ao trailer oficial, em português ou, se não houver, em inglês). Sem internet ou sem trailer, a seção não aparece. Se o vídeo não puder ser reproduzido no app, aparece o botão "Assistir no YouTube".
@@ -89,4 +90,5 @@ Cobertura atual:
 - lista "Quero assistir": vazio, conteúdo, filtros, marcar como assistido e avaliar;
 - tela "Sobre": versão e texto exato de atribuição ao TMDB;
 - agendamento da notificação: intervalo de 4 dias, primeira execução na janela das 19h às 21h e política que evita agendamentos duplicados;
-- sorteio de filme: humor aleatório, sem filmes assistidos, funcionamento offline com cache e aviso quando não há filme para sortear.
+- sorteio de filme: humor aleatório, sem filmes assistidos, funcionamento offline com cache e aviso quando não há filme para sortear;
+- botão "Me surpreenda": abre o filme sorteado, avisa quando não há filme e ignora toques repetidos durante o sorteio.

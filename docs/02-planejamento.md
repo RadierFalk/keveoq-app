@@ -455,3 +455,7 @@ Decididas na aprovação deste planejamento:
 7. **Textos da notificação** aprovados conforme a seção 8.
 8. **`SharedPreferences`** para registrar que a permissão de notificação já foi pedida.
 9. **Detalhes do filme** seguem a mesma validade de 24 h das recomendações (seção 6.3).
+
+Decididas durante a implementação:
+
+10. **Cache com data de atualização no futuro é considerado expirado** (T08). Se o relógio do aparelho for atrasado depois de uma atualização, a idade do cache fica negativa; tratá-lo como expirado força uma nova busca, que corrige a data gravada, em vez de deixar o cache válido indefinidamente.

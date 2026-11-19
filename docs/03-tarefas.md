@@ -120,7 +120,7 @@
 - **Relacionado:** RNF01 · Seção 5
 - **Commit:** `feat: cria banco de dados local`
 
-### [ ] T17 — Repositório de filmes
+### [x] T17 — Repositório de filmes
 - **Descrição:** `MovieRepositoryImpl`: observar recomendações e detalhes; atualizar recomendações (páginas 1 e 2, tudo ou nada, em transação); atualizar detalhes e vídeos.
 - **Pronto quando:** testes com API e DAO falsos cobrem: cache válido, cache expirado, falha de rede com cache (cache preservado), falha sem cache, duas páginas consultadas.
 - **Relacionado:** RF04, RF07, RF14, RF15, RN11 · CA09, CA10, CA33

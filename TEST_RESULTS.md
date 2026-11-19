@@ -7,6 +7,26 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:39 — T17: repositório de filmes
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 158 |
+| Aprovados | 158 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas** (com `TmdbApi` e `MovieDao` falsos, sem rede nem banco reais):
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `MovieRepositoryImplTest` | 16 | Páginas 1 e 2 consultadas e gravadas em ordem (RN11, CA33); critérios enviados à API; duplicados entre páginas; substituição do cache; humores independentes; **falha de rede com cache preserva o cache** (CA09); **falha sem cache** mantém cache vazio (CA10); falha na página 2 não grava nada; falha do banco vira `Unknown`; **cache válido não chama a API** e **cache expirado chama e atualiza a data** (caso de uso + repositório, CA06, CA07); detalhes com data da busca; erro 404; vídeos por idioma; detalhes gravados e observados |
+| `SafeDbCallTest` | 3 | Sucesso; falha do banco → `Unknown`; `CancellationException` relançada |
+
+---
+
 ## 2026-11-19 14:37 — T16: banco de dados local (Room)
 
 | Item | Valor |

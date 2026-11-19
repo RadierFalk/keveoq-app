@@ -88,7 +88,7 @@
 - **Relacionado:** RF01, RF03–RF05, RF13 · CA04, CA06–CA08
 - **Commit:** `feat: cria casos de uso de recomendacoes`
 
-### [ ] T12 — Casos de uso de detalhes e trailer
+### [x] T12 — Casos de uso de detalhes e trailer
 - **Descrição:** `ObserveMovieDetailsUseCase` e `RefreshMovieDetailsUseCase` (detalhes + trailer em pt-BR, com fallback en-US; validade de 24 h).
 - **Pronto quando:** testes cobrem fallback para en-US, filme sem trailer, cache válido e offline.
 - **Relacionado:** RF06, RF07, RF20, RN09 · CA12, CA15–CA17

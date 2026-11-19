@@ -7,6 +7,28 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:15 — T12: casos de uso de detalhes e trailer
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 73 |
+| Aprovados | 73 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `ObserveMovieDetailsUseCaseTest` | 1 | Emite nulo sem cache e depois os detalhes gravados |
+| `RefreshMovieDetailsUseCaseTest` | 9 | Trailer em pt-BR; fallback para en-US (CA16); sem trailer válido (CA17); cache de detalhes válido não chama a API; expirado busca de novo; offline sem cache devolve `Network`; offline com cache; falha nos detalhes ou nos vídeos não grava nada |
+
+As classes anteriores foram executadas novamente, sem falhas.
+
+---
+
 ## 2026-11-19 14:14 — T11: casos de uso de recomendações
 
 | Item | Valor |

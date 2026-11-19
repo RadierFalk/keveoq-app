@@ -459,3 +459,4 @@ Decididas na aprovação deste planejamento:
 Decididas durante a implementação:
 
 10. **Cache com data de atualização no futuro é considerado expirado** (T08). Se o relógio do aparelho for atrasado depois de uma atualização, a idade do cache fica negativa; tratá-lo como expirado força uma nova busca, que corrige a data gravada, em vez de deixar o cache válido indefinidamente.
+11. **Atualização dos detalhes é "tudo ou nada"** (T12), como a das recomendações: se a busca dos detalhes ou de qualquer lista de vídeos (pt-BR ou en-US) falhar, nada é gravado e o erro é devolvido. Assim o banco nunca guarda um filme "sem trailer" só porque a requisição de vídeos falhou; os detalhes antigos, se existirem, continuam disponíveis.

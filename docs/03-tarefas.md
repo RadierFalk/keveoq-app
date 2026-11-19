@@ -38,7 +38,7 @@
 - **Relacionado:** RNF07, RNF12 · Seções 1, 9.3
 - **Commit:** `feat: aplica tema da identidade visual`
 
-### [ ] T04 — Criar o pacote core
+### [x] T04 — Criar o pacote core
 - **Descrição:** `AppResult` (`Success`/`Failure`), `AppError` (`Network`, `Http(code)`, `Serialization`, `Unknown`), `AppDispatchers` e a interface `NetworkMonitor`. Tudo em Kotlin puro.
 - **Pronto quando:** os tipos compilam e não importam `android.*`.
 - **Relacionado:** RNF02, RNF09 · Seções 2.1, 7.1

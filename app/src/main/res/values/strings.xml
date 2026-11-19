@@ -32,6 +32,10 @@
     <string name="action_open_watchlist">Quero assistir</string>
     <string name="action_open_about">Sobre</string>
 
+    <!-- Recomendações -->
+    <string name="recommendations_empty">Nenhum filme novo para este humor agora. Puxe a tela para baixo para buscar de novo.</string>
+    <string name="action_back">Voltar</string>
+
     <!-- Conexão -->
     <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
 

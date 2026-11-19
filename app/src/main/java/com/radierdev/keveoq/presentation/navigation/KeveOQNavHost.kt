@@ -15,9 +15,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.radierdev.keveoq.R
-import com.radierdev.keveoq.presentation.screens.mood.MoodRoute
+import com.radierdev.keveoq.domain.model.Mood
 import com.radierdev.keveoq.presentation.theme.Dimens
+// As telas também se chamam XRoute (padrão do CLAUDE.md), como as rotas deste pacote.
+// Os aliases deixam claro, aqui, que estes são os composables das telas.
+import com.radierdev.keveoq.presentation.screens.mood.MoodRoute as MoodScreenRoute
+import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsRoute as RecommendationsScreenRoute
 
 /**
  * Grafo de navegação do app. Começa na seleção de humor.
@@ -36,13 +41,21 @@ fun KeveOQNavHost(
         modifier = modifier,
     ) {
         composable<MoodRoute> {
-            MoodRoute(
+            MoodScreenRoute(
                 onSeeMovies = { mood -> navController.navigate(RecommendationsRoute(mood = mood.name)) },
                 onOpenWatchlist = { navController.navigate(WatchlistRoute) },
                 onOpenAbout = { navController.navigate(AboutRoute) },
             )
         }
-        composable<RecommendationsRoute> { PendingScreen(stringResource(R.string.screen_recommendations)) }
+        composable<RecommendationsRoute> { backStackEntry ->
+            // toRoute() lê os argumentos da rota já tipados; o humor volta ao enum aqui.
+            val route = backStackEntry.toRoute<RecommendationsRoute>()
+            RecommendationsScreenRoute(
+                mood = Mood.valueOf(route.mood),
+                onBack = { navController.popBackStack() },
+                onMovieClick = { movieId -> navController.navigate(DetailsRoute(movieId = movieId)) },
+            )
+        }
         composable<DetailsRoute> { PendingScreen(stringResource(R.string.screen_details)) }
         composable<WatchlistRoute> { PendingScreen(stringResource(R.string.screen_watchlist)) }
         composable<AboutRoute> { PendingScreen(stringResource(R.string.screen_about)) }

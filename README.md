@@ -11,6 +11,7 @@ Em implementação. Este README descreve apenas o que já existe e é atualizado
 ## Funcionalidades implementadas
 
 - **Seleção de humor (tela inicial):** a pergunta "Como você está hoje?" e oito humores em cards com uma dica de gênero. O botão "Ver filmes" é habilitado ao escolher um humor, e a escolha é mantida ao girar o aparelho. A barra superior tem atalhos para "Quero assistir" e "Sobre".
+- **Recomendações por humor:** lista de filmes do TMDB (pôster, título, ano e nota) para o humor escolhido, sem filmes já assistidos nem repetidos, com "Atualizado há…". Os dados ficam salvos no aparelho e valem 24 horas; puxar a lista para baixo força uma nova busca. Sem internet, a lista salva continua aparecendo e um aviso informa a falha; sem lista salva e sem internet, aparece uma mensagem com "Tentar novamente".
 - **Indicador de modo offline:** um banner "Sem internet. Mostrando o que já está salvo." aparece no topo de todas as telas enquanto o aparelho está sem conexão e some quando ela volta.
 - **Base de dados e rede prontas:** recomendações por humor, detalhes, trailer e lista "Quero assistir" já funcionam nas camadas de domínio e dados (com testes), aguardando as telas.
 
@@ -76,4 +77,5 @@ Cobertura atual:
 - repositório da lista "Quero assistir": salvar sem duplicar, marcar como assistido, avaliar e tratar falhas do banco sem encerrar o app;
 - injeção de dependências: o Koin consegue construir todos os casos de uso;
 - apresentação: mensagens de erro em português, texto "Atualizado há…" e estado de conexão usado pelo banner "sem internet";
-- tela de humor: lista dos humores, seleção e habilitação do botão "Ver filmes".
+- tela de humor: lista dos humores, seleção e habilitação do botão "Ver filmes";
+- tela de recomendações: carregando, lista, vazio, erro com "Tentar novamente", aviso de falha com dados salvos e pull-to-refresh.

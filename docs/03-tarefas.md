@@ -146,7 +146,7 @@
 - **Relacionado:** RF01, RF02, RF24 · CA01, CA34
 - **Commit:** `feat: implementa tela de selecao de humor`
 
-### [ ] T21 — Tela de recomendações
+### [x] T21 — Tela de recomendações
 - **Descrição:** `RecommendationsRoute`/`Screen`/`ViewModel`: lista, "Atualizado há…", pull-to-refresh, Snackbar, estados Loading/Success/Empty/Error com "Tentar novamente".
 - **Pronto quando:** testes do ViewModel (Turbine + `StandardTestDispatcher`) cobrem Loading → Success, Empty, Error e Snackbar com cache; tocar no filme abre os detalhes.
 - **Relacionado:** RF03–RF05, RF14, RF15, RF23 · CA06–CA10, CA32

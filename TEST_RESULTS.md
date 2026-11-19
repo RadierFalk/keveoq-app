@@ -7,6 +7,32 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:59 — T21: tela de recomendações
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 198 |
+| Aprovados | 198 |
+| Falhas | 0 (na execução final) |
+| Ignorados | 0 |
+| Correções aplicadas | Ver abaixo |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `RecommendationsViewModelTest` | 10 | Loading → Success; Loading → Empty; Loading → Error offline sem cache (CA10); "Tentar novamente" após erro; cache válido sem chamar a API e "Atualizado há 3 h" (CA06, CA32); falha com cache mantém os filmes e emite Snackbar (CA09); falha sem cache não emite Snackbar; pull-to-refresh força a busca (CA08); filme assistido some da lista (CA04); cache com todos assistidos → Empty |
+
+**Correções aplicadas** (execução anterior, às 14:57: 198 testes, 2 falhas):
+
+1. `tentar novamente apos erro deve carregar os filmes`: revelou um defeito real. Após uma atualização bem-sucedida, o ViewModel marcava "concluída" antes de o banco emitir os filmes novos, e a tela mostrava "vazio" por um instante. Correção: só marcar "sem resultados" depois de confirmar que o banco está de fato vazio.
+2. `falha com cache deve manter os filmes e mostrar snackbar`: erro no próprio teste, que não ignorava o valor inicial do `StateFlow`.
+
+**Verificação da API:** consulta real a `discover/movie` com a chave configurada respondeu HTTP 200 com 20 filmes em pt-BR (feita por `curl`, sem exibir a chave).
+
+---
+
 ## 2026-11-19 14:52 — T20: tela de seleção de humor
 
 | Item | Valor |

@@ -44,7 +44,7 @@
 - **Relacionado:** RNF02, RNF09 · Seções 2.1, 7.1
 - **Commit:** `feat: cria tipos de resultado, erros e dispatchers`
 
-### [ ] T05 — Application, Koin, manifesto e monitor de conexão
+### [x] T05 — Application, Koin, manifesto e monitor de conexão
 - **Descrição:** criar `KeveOQApp` (inicia o Koin), registrá-lo no manifesto; declarar `INTERNET`, `ACCESS_NETWORK_STATE` e `POST_NOTIFICATIONS`; implementar `AndroidNetworkMonitor` (`callbackFlow`); criar os módulos Koin (ainda quase vazios) com `appModule` (`AppDispatchers`, `Clock`, `NetworkMonitor`).
 - **Pronto quando:** o app abre com o Koin iniciado, sem erros no Logcat.
 - **Relacionado:** RF13, RNF02 · Seções 6.6, 10

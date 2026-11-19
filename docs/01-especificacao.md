@@ -35,6 +35,7 @@ Pessoas que assistem filmes em casa e querem uma sugestão rápida, sem precisar
 | F7 | Notificação periódica sugerindo o uso do app |
 | F8 | Trailer do filme na tela de detalhes (somente com conexão) |
 | F9 | Sorteio de um filme aleatório ("Me surpreenda"), para quem não quer escolher um humor |
+| F10 | Onde assistir: serviços de assinatura, aluguel e compra no Brasil e selo "Em cartaz nos cinemas", na tela de detalhes |
 
 **Fora do escopo:** login e cadastro, contas do TMDB, busca livre por texto e remoção de filmes da lista "Quero assistir".
 
@@ -68,6 +69,9 @@ Pessoas que assistem filmes em casa e querem uma sugestão rápida, sem precisar
 | RF24 | A barra superior da tela inicial deve ter botões de ícone que abrem as telas "Quero assistir" e "Sobre". | F1, F4, F6 |
 | RF25 | A tela inicial deve ter o botão "Me surpreenda", acima de "Ver filmes" e sempre habilitado, que sorteia um filme conforme RN12 e abre a tela de detalhes dele, sem que o usuário escolha um humor. | F9 |
 | RF26 | Durante o sorteio, o botão deve indicar que está trabalhando e não aceitar novos toques; se não houver filme para sortear, o app deve informar o motivo sem sair da tela inicial. | F9 |
+| RF27 | A tela de detalhes deve ter a seção "Onde assistir", com os serviços do Brasil agrupados em "Incluso na assinatura", "Alugar" e "Comprar" (logo e nome de cada serviço), conforme RN13. Grupos sem serviços não aparecem; sem nenhum serviço, a seção informa que o filme não está disponível em serviços digitais no Brasil. | F10 |
+| RF28 | A seção "Onde assistir" deve exibir o selo "Em cartaz nos cinemas" quando a regra RN14 indicar, e a atribuição "Dados de disponibilidade: JustWatch". | F10 |
+| RF29 | A seção "Onde assistir" deve ter o botão "Ver opções no JustWatch", que abre no navegador a página do filme com os links para cada serviço; sem conexão ou sem link, o botão não aparece. | F10 |
 
 ## 7. Requisitos não funcionais (RNF)
 
@@ -131,6 +135,10 @@ As recomendações são ordenadas por popularidade (decrescente).
 
 **RN12 — Sorteio de filme.** O sorteio escolhe um humor ao acaso e usa as recomendações desse humor, obtidas como em qualquer abertura de recomendações (cache válido de 24 h ou atualização pela API, RN05), já filtradas por RN02 a RN04 (sem filmes assistidos, repetidos ou com poucos votos). Entre esses filmes, um é escolhido ao acaso. Se o humor sorteado não tiver nenhum filme disponível (por exemplo, sem cache e sem conexão, ou todos já assistidos), os demais humores são tentados, em ordem aleatória. Se nenhum humor tiver filmes, o sorteio não encontra filme e o usuário é informado.
 
+**RN13 — Onde assistir.** Consideram-se apenas os serviços informados pelo TMDB (dados do JustWatch) para o Brasil (`BR`), nos tipos assinatura (`flatrate`), aluguel (`rent`) e compra (`buy`), na ordem de prioridade devolvida pela API e sem serviços repetidos dentro de um mesmo grupo. Esses dados são buscados e guardados junto com os detalhes do filme (mesma validade de 24 h), por isso também aparecem offline, com a data da última atualização dos detalhes.
+
+**RN14 — Em cartaz nos cinemas.** Um filme é considerado em cartaz quando tem, no Brasil, data de lançamento nos cinemas (tipo "Theatrical" ou "Theatrical (limited)" no TMDB) e a data de hoje está entre essa data e 42 dias (6 semanas) depois dela, inclusive. É uma estimativa: o TMDB não informa salas nem a data de saída de cartaz.
+
 ## 9. Critérios de aceite
 
 Cada critério está no formato *Dado / Quando / Então* e indica os requisitos que verifica.
@@ -184,6 +192,12 @@ Cada critério está no formato *Dado / Quando / Então* e indica os requisitos 
 - **CA36** (RN12) Dado que o aparelho está offline e só um humor tem recomendações em cache, quando o usuário toca em "Me surpreenda", então é sorteado um filme desse humor.
 - **CA37** (RF26, RN12) Dado que o aparelho está offline e nenhum humor tem cache, quando o usuário toca em "Me surpreenda", então aparece uma mensagem informando que não há filmes para sortear, e o app continua na tela inicial.
 
+**Onde assistir**
+- **CA38** (RF27, RN13) Dado um filme disponível em um serviço de assinatura e em uma loja de aluguel no Brasil, quando os detalhes são abertos, então aparecem os grupos "Incluso na assinatura" e "Alugar" com os respectivos serviços, e o grupo "Comprar" não aparece.
+- **CA39** (RF27) Dado um filme sem nenhum serviço no Brasil, quando os detalhes são abertos, então a seção informa que ele não está disponível em serviços digitais no Brasil.
+- **CA40** (RF28, RN14) Dado um filme lançado nos cinemas do Brasil há 10 dias, quando os detalhes são abertos, então aparece o selo "Em cartaz nos cinemas"; lançado há 60 dias, o selo não aparece.
+- **CA41** (RF27, RF29, RN13) Dado um filme cujos detalhes já foram abertos com internet, quando ele é aberto de novo offline, então os serviços continuam visíveis e o botão "Ver opções no JustWatch" não aparece.
+
 ## 10. Decisões registradas
 
 Pontos que o `CLAUDE.md` não definia, decididos durante a aprovação desta especificação:
@@ -197,3 +211,4 @@ Pontos que o `CLAUDE.md` não definia, decididos durante a aprovação desta esp
 Decididos depois da aprovação inicial, durante a implementação:
 
 6. **Sorteio de filme (F9):** acrescentado a pedido do responsável do projeto. O filme vem de um humor aleatório, reaproveitando as recomendações (RN12), e o botão "Me surpreenda" fica acima de "Ver filmes" (RF25).
+7. **Onde assistir (F10):** acrescentado a pedido do responsável do projeto. Mostra assinatura, aluguel e compra (RN13), um selo estimado de "Em cartaz nos cinemas" (RN14), porque o TMDB não informa salas, e um botão para a página do JustWatch (RF29), porque o TMDB não fornece o link direto de cada serviço. A atribuição ao JustWatch é exigida pelos termos do TMDB.

@@ -198,6 +198,20 @@
 - **Relacionado:** RF25, RF26 · CA35–CA37 · Seção 9.2
 - **Commit:** `feat: adiciona botao me surpreenda na tela inicial`
 
+## Onde assistir (acrescentado após a T26B)
+
+### [ ] T26C — Dados e regras de "onde assistir"
+- **Descrição:** modelos `WatchProviders` e `WatchProvider`; `TheatricalRule` (RN14); `MovieDetails` com `watchProviders` e `theatricalReleaseBr`; DTOs de `release_dates` e `watch/providers` e `append_to_response` na chamada de detalhes; mappers (Brasil, três grupos, sem repetidos, URL do logo, data de cinema tipos 2 e 3); `movie_details` com as novas colunas, banco na versão 2 e `MIGRATION_1_2`.
+- **Pronto quando:** testes passam para `TheatricalRule` (dia da estreia, 42 dias, 43 dias, antes da estreia, sem data), leitura do JSON com `append_to_response`, mappers (só `BR`, grupos vazios, repetidos, logo, tipo de lançamento) e conversão das novas colunas; a migração preserva a lista "Quero assistir" (verificado no aparelho).
+- **Relacionado:** RF27, RF28, RN13, RN14 · CA38–CA41 · decisão 16
+- **Commit:** `feat: busca e guarda onde assistir cada filme`
+
+### [ ] T26D — Seção "Onde assistir" nos detalhes
+- **Descrição:** seção na tela de detalhes com o selo "Em cartaz nos cinemas", os grupos "Incluso na assinatura", "Alugar" e "Comprar" (logo e nome), mensagem quando não há serviços, atribuição "Dados de disponibilidade: JustWatch" e o botão "Ver opções no JustWatch" (só com conexão e link).
+- **Pronto quando:** testes do `DetailsViewModel` cobrem selo dentro e fora do período, grupos repassados, botão escondido offline; previews claro/escuro; verificado no aparelho.
+- **Relacionado:** RF27–RF29 · CA38–CA41
+- **Commit:** `feat: adiciona onde assistir nos detalhes do filme`
+
 ## Validação
 
 ### [ ] T27 — README completo

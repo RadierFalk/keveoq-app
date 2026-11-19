@@ -94,7 +94,9 @@ com.radierdev.keveoq/
 | `MoodSearchCriteria` | `withGenres: Set<Int>`, `withoutGenres: Set<Int>`, `releasedUntil: LocalDate?`, `minVoteCount: Int = 100` |
 | `Movie` | `id`, `title`, `posterUrl?`, `releaseYear?`, `voteAverage`, `voteCount` |
 | `Recommendations` | `movies: List<Movie>`, `updatedAt: Instant?` |
-| `MovieDetails` | `id`, `title`, `overview`, `posterUrl?`, `voteAverage`, `releaseYear?`, `runtimeMinutes?`, `genres: List<String>`, `trailerKey?`, `updatedAt` |
+| `MovieDetails` | `id`, `title`, `overview`, `posterUrl?`, `voteAverage`, `releaseYear?`, `runtimeMinutes?`, `genres: List<String>`, `trailerKey?`, `updatedAt`, `watchProviders: WatchProviders`, `theatricalReleaseBr: LocalDate?` |
+| `WatchProviders` | `subscription`, `rent`, `buy` (cada um `List<WatchProvider>`), `link: String?` (página do JustWatch/TMDB) |
+| `WatchProvider` | `id`, `name`, `logoUrl?` |
 | `Video` | `key`, `site`, `type`, `official` |
 | `SavedMovie` | `movieId`, `title`, `posterUrl?`, `releaseYear?`, `status: WatchStatus`, `rating: Int?`, `savedAt` |
 | `WatchStatus` (enum) | `WANT_TO_WATCH`, `WATCHED` |
@@ -111,6 +113,7 @@ Os nomes dos humores ficam em inglês no código; o texto em português ("Feliz"
 | `RecommendationRules` | Remover duplicados (por `id`), remover assistidos e filmes com menos de 100 votos, mantendo a ordem | RN02, RN03, RN04 |
 | `CachePolicy` | `isExpired(updatedAt, now)`: verdadeiro se nulo ou com 24 h ou mais | RN05 |
 | `TrailerSelector` | Escolhe a chave: `site = YouTube` e `type = Trailer`, oficial primeiro | RN09 |
+| `TheatricalRule` | `isInTheaters(releaseDate: LocalDate?, today: LocalDate)`: verdadeiro de `releaseDate` até 42 dias depois, inclusive | RN14 |
 | `RatingRules` | Valida nota inteira de 1 a 5 | RN08 |
 | `NotificationWindow` | Calcula o atraso até a próxima janela 19h–21h a partir de um `LocalDateTime` | RN10 |
 
@@ -169,7 +172,7 @@ Do mesmo jeito: `AddToWatchlistResult` (`Added`, `AlreadyInList`) e `MarkAsWatch
 | Uso | Requisição |
 |---|---|
 | Recomendações | `GET discover/movie?with_genres=35\|16\|10751&without_genres=27,53&sort_by=popularity.desc&vote_count.gte=100&language=pt-BR&page=1` (e `page=2`). Nostálgico acrescenta `primary_release_date.lte=1999-12-31`. |
-| Detalhes | `GET movie/{movie_id}?language=pt-BR` |
+| Detalhes | `GET movie/{movie_id}?language=pt-BR&append_to_response=release_dates,watch/providers` (uma única requisição traz também as datas de lançamento por país e os serviços de streaming) |
 | Trailer | `GET movie/{movie_id}/videos?language=pt-BR`; se `TrailerSelector` não achar trailer, `GET movie/{movie_id}/videos?language=en-US` |
 | Pôster | `https://image.tmdb.org/t/p/w500{poster_path}` |
 | Trailer externo | `https://www.youtube.com/watch?v={key}` |
@@ -367,7 +370,7 @@ O humor vai como `String` (nome do enum) porque tipos simples na rota não exige
 |---|---|---|
 | Humor | `displaySmall` "Como você está hoje?"; grade de 8 cards (nome em `titleMedium`, dica em `bodySmall`); botão "Ver filmes" habilitado após a seleção; botão "Me surpreenda" (`OutlinedButton` com ícone de dado) acima de "Ver filmes", com indicador enquanto sorteia; barra superior com o logo, "Quero assistir" e "Sobre" | Conteúdo fixo + `isPickingRandom`; resultado do sorteio por evento único (navegar para os detalhes ou Snackbar) |
 | Recomendações | Título com o humor (`headlineSmall`), "Atualizado há…", lista com `MovieListItem`, pull-to-refresh, Snackbar | Loading, Success, Empty, Error |
-| Detalhes | Pôster em largura total (320 dp), título, ano, duração, nota, chips de gênero, sinopse, trailer, ação conforme o status: "Quero assistir" (`Button`), "Já assisti" (`OutlinedButton`) ou estrelas | Loading, Success, Error |
+| Detalhes | Pôster em largura total (320 dp), título, ano, duração, nota, chips de gênero, sinopse, trailer, ação conforme o status: "Quero assistir" (`Button`), "Já assisti" (`OutlinedButton`) ou estrelas; seção "Onde assistir" (selo "Em cartaz nos cinemas" em chip `secondaryContainer`, grupos com logo e nome dos serviços, atribuição ao JustWatch em `bodySmall`/`onSurfaceVariant`, `OutlinedButton` "Ver opções no JustWatch" só com conexão) | Loading, Success, Error |
 | Quero assistir | Filtro por status (chips: Todos, Quero assistir, Assistidos), itens com "Já assisti" ou estrelas | Loading, Success, Empty, Error |
 | Sobre | Nome, versão do app, descrição curta, atribuição ao TMDB, créditos das fontes | Só `Success` (conteúdo fixo) |
 
@@ -465,3 +468,4 @@ Decididas durante a implementação:
 13. **Tabelas guardam `posterUrl` e `releaseYear`** (T16), em vez de `posterPath` e `releaseDate` da seção 5. Os detalhes e a lista salva são gravados a partir dos modelos do domain, que só têm a URL completa e o ano; guardar os mesmos campos evita conversões de volta e mantém a URL do pôster idêntica à usada pelo cache do Coil.
 14. **`MovieDao` usa `@Upsert` em vez de `REPLACE`** (T16). O `REPLACE` apaga a linha antes de inserir, e o `CASCADE` da chave estrangeira apagaria as recomendações do mesmo filme nos outros humores.
 15. **Sorteio de filme (F9, RN12)**, acrescentado após a T26. O `PickRandomMovieUseCase` reaproveita os casos de uso de recomendações em vez de criar uma consulta nova à API: assim o sorteio respeita o cache de 24 h, funciona offline com os humores que já têm cache e já exclui assistidos e repetidos. O `kotlin.random.Random` é injetado (fixo nos testes, `Random.Default` no app), para o sorteio ser testável. Com conexão, normalmente só o primeiro humor é consultado; offline, os humores sem cache devolvem `Network` sem chamar a API, então tentar os oito é rápido. O ícone de dado (`ic_casino`) vem do Material Icons, como os demais ícones fora do conjunto core.
+16. **Onde assistir (F10, RN13, RN14)**, acrescentado após a T26B. Os serviços e as datas de lançamento vêm na **mesma requisição** dos detalhes (`append_to_response=release_dates,watch/providers`): não há chamada extra, a atualização continua "tudo ou nada" (decisão 11) e os dados ficam offline com a mesma validade de 24 h. A tabela `movie_details` ganha as colunas `watchProviders` (texto JSON, como os gêneros) e `theatricalReleaseBr` (dia em epoch, nulo se não houver); o banco passa para a **versão 2** com uma **migração de verdade** (`MIGRATION_1_2`), em vez da migração destrutiva prevista na seção 5: `ALTER TABLE` acrescenta as duas colunas (serviços vazios por padrão) e `UPDATE movie_details SET updatedAt = 0` marca os detalhes antigos como expirados, para serem buscados de novo, já com os serviços, na próxima abertura com internet. Assim a lista "Quero assistir" e as avaliações de quem já usa o app são preservadas. A migração destrutiva continua configurada só como rede de segurança. Os logos usam `https://image.tmdb.org/t/p/w92{logo_path}` e o cache do Coil. A regra do selo fica no domain (`TheatricalRule`), testável com data fixa.

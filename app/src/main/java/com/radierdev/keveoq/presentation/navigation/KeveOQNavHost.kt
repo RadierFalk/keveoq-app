@@ -21,6 +21,7 @@ import com.radierdev.keveoq.domain.model.Mood
 import com.radierdev.keveoq.presentation.theme.Dimens
 // As telas também se chamam XRoute (padrão do CLAUDE.md), como as rotas deste pacote.
 // Os aliases deixam claro, aqui, que estes são os composables das telas.
+import com.radierdev.keveoq.presentation.screens.details.DetailsRoute as DetailsScreenRoute
 import com.radierdev.keveoq.presentation.screens.mood.MoodRoute as MoodScreenRoute
 import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsRoute as RecommendationsScreenRoute
 
@@ -56,7 +57,13 @@ fun KeveOQNavHost(
                 onMovieClick = { movieId -> navController.navigate(DetailsRoute(movieId = movieId)) },
             )
         }
-        composable<DetailsRoute> { PendingScreen(stringResource(R.string.screen_details)) }
+        composable<DetailsRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<DetailsRoute>()
+            DetailsScreenRoute(
+                movieId = route.movieId,
+                onBack = { navController.popBackStack() },
+            )
+        }
         composable<WatchlistRoute> { PendingScreen(stringResource(R.string.screen_watchlist)) }
         composable<AboutRoute> { PendingScreen(stringResource(R.string.screen_about)) }
     }

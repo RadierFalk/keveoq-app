@@ -36,6 +36,17 @@
     <string name="recommendations_empty">Nenhum filme novo para este humor agora. Puxe a tela para baixo para buscar de novo.</string>
     <string name="action_back">Voltar</string>
 
+    <!-- Detalhes do filme -->
+    <string name="action_add_to_watchlist">Quero assistir</string>
+    <string name="action_mark_as_watched">Já assisti</string>
+    <string name="details_rate_title">Sua avaliação</string>
+    <string name="details_overview_title">Sinopse</string>
+    <string name="details_overview_unavailable">Sinopse não disponível em português.</string>
+    <string name="runtime_hours_minutes">%1$d h %2$d min</string>
+    <string name="runtime_minutes">%1$d min</string>
+    <string name="message_already_in_list">Este filme já está na sua lista.</string>
+    <string name="error_save">Não foi possível salvar a alteração. Tente novamente.</string>
+
     <!-- Conexão -->
     <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
 

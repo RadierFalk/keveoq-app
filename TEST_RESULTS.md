@@ -7,6 +7,25 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:06 — T22: tela de detalhes do filme
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 207 |
+| Aprovados | 207 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `DetailsViewModelTest` | 9 | Loading → Success (CA14); detalhes gravados ao abrir (RF07); offline sem cache → Error; offline com detalhes já abertos → Success (CA12); "Tentar novamente"; salvar troca para "Já assisti" (CA20); marcar como assistido troca para estrelas (CA22); avaliar com 4 e trocar para 2 (CA24); falha ao salvar → Snackbar |
+
+---
+
 ## 2026-11-19 14:59 — T21: tela de recomendações
 
 | Item | Valor |

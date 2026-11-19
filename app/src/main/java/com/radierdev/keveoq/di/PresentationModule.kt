@@ -1,6 +1,7 @@
 package com.radierdev.keveoq.di
 
 import com.radierdev.keveoq.presentation.KeveOQAppViewModel
+import com.radierdev.keveoq.presentation.screens.details.DetailsViewModel
 import com.radierdev.keveoq.presentation.screens.mood.MoodViewModel
 import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsViewModel
 import org.koin.core.module.dsl.viewModel
@@ -19,6 +20,19 @@ val presentationModule = module {
             observeRecommendations = get(),
             refreshRecommendations = get(),
             clock = get(),
+        )
+    }
+
+    // O ID do filme vem da rota de navegação, passado pela tela com parametersOf(movieId).
+    viewModel { params ->
+        DetailsViewModel(
+            movieId = params.get(),
+            observeMovieDetails = get(),
+            observeSavedMovie = get(),
+            refreshMovieDetails = get(),
+            addToWatchlist = get(),
+            markAsWatched = get(),
+            rateMovie = get(),
         )
     }
 }

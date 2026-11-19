@@ -35,6 +35,7 @@ fun PosterImage(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     shape: Shape = MaterialTheme.shapes.small,
+    contentScale: ContentScale = ContentScale.Crop,
 ) {
     Box(
         modifier = modifier
@@ -52,7 +53,7 @@ fun PosterImage(
             AsyncImage(
                 model = posterUrl,
                 contentDescription = contentDescription,
-                contentScale = ContentScale.Crop,
+                contentScale = contentScale,
                 modifier = Modifier.fillMaxSize(),
             )
         }

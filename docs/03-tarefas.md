@@ -152,7 +152,7 @@
 - **Relacionado:** RF03–RF05, RF14, RF15, RF23 · CA06–CA10, CA32
 - **Commit:** `feat: implementa tela de recomendacoes`
 
-### [ ] T22 — Tela de detalhes
+### [x] T22 — Tela de detalhes
 - **Descrição:** `DetailsRoute`/`Screen`/`ViewModel`: pôster, título, ano, duração, nota, chips de gênero, sinopse; ação conforme o status ("Quero assistir", "Já assisti" ou estrelas).
 - **Pronto quando:** testes do ViewModel cobrem Loading → Success, Error offline sem cache, salvar, marcar como assistido e avaliar.
 - **Relacionado:** RF06–RF08, RF10, RF11 · CA12, CA14, CA20, CA22, CA24

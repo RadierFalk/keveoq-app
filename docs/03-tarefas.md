@@ -186,7 +186,7 @@
 
 ## Sorteio de filme (acrescentado após a T26)
 
-### [ ] T26A — Caso de uso do sorteio
+### [x] T26A — Caso de uso do sorteio
 - **Descrição:** `RandomMovieResult` (`Found(movieId, mood)`, `NoMovieAvailable`) e `PickRandomMovieUseCase`, com `Random` injetado, reaproveitando `RefreshRecommendationsUseCase` e `ObserveRecommendationsUseCase`; registrar no `domainModule` e `Random.Default` no `appModule`.
 - **Pronto quando:** testes com repositórios falsos e `Random` fixo cobrem: sorteio com conexão, filme assistido nunca sorteado, humor sem filmes passa para o próximo, offline com cache em um único humor (CA36), nenhum filme disponível (CA37) e cache válido sem chamar a API.
 - **Relacionado:** RF25, RN12 · CA35–CA37 · Seção 2.4, decisão 15

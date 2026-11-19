@@ -25,7 +25,9 @@ import org.junit.Test
 import org.koin.core.KoinApplication
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
+import com.radierdev.keveoq.domain.usecase.PickRandomMovieUseCase
 import java.time.Clock
+import kotlin.random.Random
 
 /**
  * Confere que o Koin consegue construir todos os casos de uso do [domainModule].
@@ -39,6 +41,7 @@ class DomainModuleTest {
         single<SavedMovieRepository> { FakeSavedMovieRepository() }
         single<NetworkMonitor> { FakeNetworkMonitor() }
         single<Clock> { TestData.clock }
+        single<Random> { Random(0) }
     }
 
     private val app: KoinApplication = koinApplication { modules(fakes, domainModule) }
@@ -63,5 +66,6 @@ class DomainModuleTest {
         assertNotNull(koin.get<MarkAsWatchedUseCase>())
         assertNotNull(koin.get<RateMovieUseCase>())
         assertNotNull(koin.get<CalculateNotificationDelayUseCase>())
+        assertNotNull(koin.get<PickRandomMovieUseCase>())
     }
 }

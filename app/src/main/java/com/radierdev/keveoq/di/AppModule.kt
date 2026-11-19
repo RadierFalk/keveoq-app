@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import java.time.Clock
+import kotlin.random.Random
 
 /**
  * Dependências de infraestrutura usadas por várias camadas.
@@ -24,6 +25,7 @@ val appModule = module {
         )
     }
     single<Clock> { Clock.systemDefaultZone() }
+    single<Random> { Random.Default } // sorteio de filme; nos testes, semente fixa
     single<NetworkMonitor> { AndroidNetworkMonitor(androidContext()) }
 
     // Notificação periódica (seção 8 do planejamento)

@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:41 — T26A: caso de uso do sorteio de filme
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 232 |
+| Aprovados | 232 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova** (com repositórios falsos e `Random` de semente fixa):
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `PickRandomMovieUseCaseTest` | 7 | Sorteio com conexão (CA35); filme assistido nunca sorteado, em 20 sementes; humor sem filmes passa para outro; offline com cache em um só humor (CA36); offline sem cache → nenhum filme (CA37); cache válido não chama a API; mesma semente, mesmo resultado |
+
+`DomainModuleTest` passou a conferir também o `PickRandomMovieUseCase`.
+
+---
+
 ## 2026-11-19 15:25 — T26: notificação periódica
 
 | Item | Valor |

@@ -88,4 +88,5 @@ Cobertura atual:
 - trailer: exibido só com conexão e com trailer válido, escondido ao perder a conexão;
 - lista "Quero assistir": vazio, conteúdo, filtros, marcar como assistido e avaliar;
 - tela "Sobre": versão e texto exato de atribuição ao TMDB;
-- agendamento da notificação: intervalo de 4 dias, primeira execução na janela das 19h às 21h e política que evita agendamentos duplicados.
+- agendamento da notificação: intervalo de 4 dias, primeira execução na janela das 19h às 21h e política que evita agendamentos duplicados;
+- sorteio de filme: humor aleatório, sem filmes assistidos, funcionamento offline com cache e aviso quando não há filme para sortear.

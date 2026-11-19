@@ -52,7 +52,7 @@
 
 ## Domain
 
-### [ ] T06 — Modelos de domínio
+### [x] T06 — Modelos de domínio
 - **Descrição:** `Mood`, `MoodSearchCriteria`, `Movie`, `Recommendations`, `MovieDetails`, `Video`, `SavedMovie`, `WatchStatus` e os resultados `AddToWatchlistResult`, `MarkAsWatchedResult`, `RateMovieResult`.
 - **Pronto quando:** compilam, em Kotlin puro, com os campos da seção 2.3.
 - **Relacionado:** RNF02 · Seções 2.3, 2.4

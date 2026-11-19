@@ -7,6 +7,27 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:25 — T26: notificação periódica
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 225 |
+| Aprovados | 225 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `NotificationSchedulerTest` | 5 | Com `WorkManager` simulado (MockK): nome único `movie_suggestion` e política `KEEP` (CA30); intervalo de 4 dias; atraso inicial de 5 h às 14h, 21 h às 22h e zero dentro da janela (RN10, CA29); worker agendado |
+
+O Worker, a exibição da notificação, o pedido de permissão e o toque na notificação dependem do Android e são verificados manualmente.
+
+---
+
 ## 2026-11-19 15:20 — T25: tela "Sobre" (todas as telas concluídas)
 
 | Item | Valor |

@@ -66,6 +66,12 @@
     <string name="action_choose_mood">Escolher um humor</string>
     <string name="error_watchlist">Não foi possível abrir sua lista. Tente novamente.</string>
 
+    <!-- Notificação (seção 8 do planejamento) -->
+    <string name="notification_channel_name">Sugestões de filmes</string>
+    <string name="notification_channel_description">Lembretes ocasionais para escolher um filme de acordo com o seu humor.</string>
+    <string name="notification_title">Que tal um filme hoje?</string>
+    <string name="notification_text">Conte como você está e o KeveOQ escolhe um filme para você.</string>
+
     <!-- Conexão -->
     <string name="offline_banner">Sem internet. Mostrando o que já está salvo.</string>
 

@@ -178,7 +178,7 @@
 
 ## Notificação
 
-### [ ] T26 — Notificação periódica
+### [x] T26 — Notificação periódica
 - **Descrição:** canal "Sugestões de filmes", `MovieSuggestionWorker`, `NotificationScheduler` (`KEEP`, 4 dias, atraso inicial do domain), ícone monocromático via Vector Asset, `PendingIntent` para a tela de humor, pedido de permissão na primeira abertura com `NotificationPermissionPrefs`.
 - **Pronto quando:** a permissão é pedida uma única vez (Android 13+); abrir o app várias vezes mantém um só agendamento (verificado no App Inspection → Background Task Inspector); disparo manual mostra a notificação e o toque abre a seleção de humor.
 - **Relacionado:** RF17–RF19, RN10 · CA28, CA30, CA31 · Seção 8

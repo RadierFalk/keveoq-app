@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícone pequeno da notificação: silhueta monocromática da pipoca do ícone do app,
+     com olhos e sorriso vazados (mesmos caminhos de ic_launcher_monochrome).
+     O Android usa só o formato (alfa) e pinta com a cor do sistema, por isso é branco.
+     Enquadramento ajustado para 24dp: o desenho ocupa ~83% da área, como os ícones do Material. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <group
+        android:translateX="-12"
+        android:translateY="-11">
+        <clip-path android:pathData="M-30,-30H150V150H-30ZM49,54a4,4 0 1,0 8,0a4,4 0 1,0 -8,0ZM67,54a4,4 0 1,0 8,0a4,4 0 1,0 -8,0ZM49.32,65.85L50.32,66.72L51.32,67.52L52.34,68.25L53.37,68.92L54.41,69.51L55.47,70.03L56.53,70.47L57.61,70.84L58.70,71.13L59.79,71.33L60.89,71.46L62.00,71.50L63.11,71.46L64.21,71.33L65.30,71.13L66.39,70.84L67.47,70.47L68.53,70.03L69.59,69.51L70.63,68.92L71.66,68.25L72.68,67.52L73.68,66.72L74.68,65.85L75.17,65.24L75.45,64.51L75.49,63.73L75.28,62.97L74.85,62.32L74.24,61.83L73.51,61.55L72.73,61.51L71.97,61.72L71.32,62.15L70.48,62.88L69.66,63.54L68.84,64.12L68.04,64.64L67.25,65.09L66.47,65.47L65.70,65.79L64.94,66.05L64.20,66.25L63.46,66.39L62.73,66.47L62.00,66.50L61.27,66.47L60.54,66.39L59.80,66.25L59.06,66.05L58.30,65.79L57.53,65.47L56.75,65.09L55.96,64.64L55.16,64.12L54.34,63.54L53.52,62.88L52.68,62.15L52.03,61.72L51.27,61.51L50.49,61.55L49.76,61.83L49.15,62.32L48.72,62.97L48.51,63.73L48.55,64.51L48.83,65.24Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M24,50a20,20 0 1,1 40,0a20,20 0 1,1 -40,0ZM40,40a22,22 0 1,1 44,0a22,22 0 1,1 -44,0ZM62,52a19,19 0 1,1 38,0a19,19 0 1,1 -38,0ZM30,70a20,20 0 1,1 40,0a20,20 0 1,1 -40,0ZM55,70a19,19 0 1,1 38,0a19,19 0 1,1 -38,0ZM20,64a14,14 0 1,1 28,0a14,14 0 1,1 -28,0ZM38,78L58,84L30,100Z" />
+    </group>
+</vector>

@@ -57,4 +57,6 @@ Cobertura atual:
 
 - mapeamento de cada humor para os critérios de busca do TMDB (gêneros, exclusões, data limite e mínimo de 100 votos);
 - regras de recomendação: mínimo de votos, remoção de filmes assistidos e de duplicados, mantendo a ordem;
-- validade de 24 horas do cache de recomendações, testada com relógio fixo.
+- validade de 24 horas do cache de recomendações, testada com relógio fixo;
+- seleção do trailer (somente YouTube do tipo "Trailer", com prioridade ao oficial);
+- validação da avaliação pessoal (1 a 5 estrelas).

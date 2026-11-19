@@ -7,6 +7,29 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:03 — T09: seleção de trailer e validação de nota
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 39 |
+| Aprovados | 39 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes testadas:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `MoodCriteriaMapperTest` | 14 | Gêneros dos 8 humores; Ansioso exclui 27 e 53 (CA02); Nostálgico até 31/12/1999 (CA03); mínimo de 100 votos (RN02) |
+| `RecommendationRulesTest` | 6 | Mínimo de votos (RN02); assistidos (RN03, CA04); duplicados (RN04, CA05); ordem preservada; listas vazias |
+| `CachePolicyTest` | 6 | Sem data, agora, 23 h 59 min, 24 h, 25 h e data no futuro (RN05, CA06, CA07) |
+| `TrailerSelectorTest` | 8 | Oficial primeiro (CA15); não oficial como alternativa; ignora teaser, outro site e chave em branco; sem vídeo válido e lista vazia (CA17); primeiro entre vários oficiais |
+| `RatingRulesTest` | 5 | Notas 0, 1, 5, 6 e negativa (RN08, CA24) |
+
+---
+
 ## 2026-11-19 13:56 — T08: regras de recomendação e validade do cache
 
 | Item | Valor |

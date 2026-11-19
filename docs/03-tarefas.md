@@ -70,7 +70,7 @@
 - **Relacionado:** RN02, RN03, RN04, RN05 · CA04–CA07
 - **Commit:** `feat: implementa regras de recomendacao e validade do cache`
 
-### [ ] T09 — Regras de trailer e de avaliação
+### [x] T09 — Regras de trailer e de avaliação
 - **Descrição:** `TrailerSelector` (YouTube + Trailer, oficial primeiro) e `RatingRules` (1 a 5).
 - **Pronto quando:** testes passam para oficial × não oficial, teaser, outro site, lista vazia e notas 0, 1, 5 e 6.
 - **Relacionado:** RN08, RN09 · CA15, CA17, CA24

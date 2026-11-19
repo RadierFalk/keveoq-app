@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">KeveOQ</string>
 
-    <!-- Títulos provisórios das telas (substituídos pelas telas reais nas tarefas T20 a T25) -->
+    <!-- Títulos das telas -->
     <string name="screen_mood">Como você está hoje?</string>
-    <string name="screen_recommendations">Recomendações</string>
-    <string name="screen_details">Detalhes do filme</string>
     <string name="screen_watchlist">Quero assistir</string>
     <string name="screen_about">Sobre</string>
-    <string name="screen_pending">Esta tela ainda está em construção.</string>
+
+    <!-- Sobre -->
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_description">O KeveOQ recomenda filmes de acordo com o seu humor. Conte como você está, e o app escolhe gêneros que combinam com o momento. Salve os filmes que quer ver, marque os que já viu e dê sua nota, mesmo sem internet.</string>
+    <string name="about_data_title">Dados dos filmes</string>
+    <string name="about_fonts_title">Fontes</string>
+    <string name="about_fonts_credits">Bricolage Grotesque e Nunito, distribuídas sob a SIL Open Font License 1.1.</string>
 
     <!-- Humores: nome e dica (seção 9.2 do planejamento) -->
     <string name="mood_happy">Feliz</string>

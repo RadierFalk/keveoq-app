@@ -7,6 +7,25 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 15:20 — T25: tela "Sobre" (todas as telas concluídas)
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 220 |
+| Aprovados | 220 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classe nova:**
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `AboutViewModelTest` | 2 | Versão do app; texto de atribuição ao TMDB exatamente como exigido (RF16, CA27) |
+
+---
+
 ## 2026-11-19 15:15 — T24: tela "Quero assistir"
 
 | Item | Valor |

@@ -170,7 +170,7 @@
 - **Relacionado:** RF09–RF12, RF23 · CA21–CA26
 - **Commit:** `feat: implementa tela quero assistir`
 
-### [ ] T25 — Tela "Sobre"
+### [x] T25 — Tela "Sobre"
 - **Descrição:** `AboutRoute`/`Screen`/`ViewModel`: nome, versão, descrição, atribuição ao TMDB e créditos das fontes.
 - **Pronto quando:** texto de atribuição exatamente como no `CLAUDE.md`; teste do ViewModel passa.
 - **Relacionado:** RF16, RNF12 · CA27

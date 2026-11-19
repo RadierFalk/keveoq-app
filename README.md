@@ -15,6 +15,7 @@ Em implementação. Este README descreve apenas o que já existe e é atualizado
 - **Detalhes do filme:** pôster, título, ano, duração, nota, gêneros e sinopse. Os detalhes ficam salvos no aparelho ao serem abertos, para consulta sem internet. Conforme a situação do filme, a tela oferece "Quero assistir", "Já assisti" ou as estrelas para avaliar (1 a 5, podendo trocar a nota).
 - **Trailer:** com internet, os detalhes mostram o trailer do filme num player do YouTube incorporado (prioridade ao trailer oficial, em português ou, se não houver, em inglês). Sem internet ou sem trailer, a seção não aparece. Se o vídeo não puder ser reproduzido no app, aparece o botão "Assistir no YouTube".
 - **Lista "Quero assistir":** filmes salvos, do mais recente para o mais antigo, com filtro (Todos, Quero assistir, Assistidos), botão "Já assisti" e estrelas para avaliar os assistidos. Funciona sem internet, porque fica só no aparelho. Lista vazia mostra o botão "Escolher um humor".
+- **Tela "Sobre":** nome e versão do app, descrição, atribuição ao TMDB ("This product uses the TMDB API but is not endorsed or certified by TMDB.") e créditos das fontes.
 - **Indicador de modo offline:** um banner "Sem internet. Mostrando o que já está salvo." aparece no topo de todas as telas enquanto o aparelho está sem conexão e some quando ela volta.
 - **Base de dados e rede prontas:** recomendações por humor, detalhes, trailer e lista "Quero assistir" já funcionam nas camadas de domínio e dados (com testes), aguardando as telas.
 
@@ -84,4 +85,5 @@ Cobertura atual:
 - tela de recomendações: carregando, lista, vazio, erro com "Tentar novamente", aviso de falha com dados salvos e pull-to-refresh;
 - tela de detalhes: carregando, conteúdo, erro, consulta offline, salvar, marcar como assistido e avaliar;
 - trailer: exibido só com conexão e com trailer válido, escondido ao perder a conexão;
-- lista "Quero assistir": vazio, conteúdo, filtros, marcar como assistido e avaliar.
+- lista "Quero assistir": vazio, conteúdo, filtros, marcar como assistido e avaliar;
+- tela "Sobre": versão e texto exato de atribuição ao TMDB.

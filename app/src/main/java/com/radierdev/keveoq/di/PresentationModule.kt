@@ -1,6 +1,8 @@
 package com.radierdev.keveoq.di
 
+import com.radierdev.keveoq.BuildConfig
 import com.radierdev.keveoq.presentation.KeveOQAppViewModel
+import com.radierdev.keveoq.presentation.screens.about.AboutViewModel
 import com.radierdev.keveoq.presentation.screens.details.DetailsViewModel
 import com.radierdev.keveoq.presentation.screens.mood.MoodViewModel
 import com.radierdev.keveoq.presentation.screens.recommendations.RecommendationsViewModel
@@ -14,6 +16,9 @@ val presentationModule = module {
     viewModelOf(::KeveOQAppViewModel)
     viewModelOf(::MoodViewModel)
     viewModelOf(::WatchlistViewModel)
+
+    // A versão vem do BuildConfig aqui, no di, para o ViewModel não conhecê-lo.
+    viewModel { AboutViewModel(appVersion = BuildConfig.VERSION_NAME) }
 
     // O humor vem da rota de navegação, passado pela tela com parametersOf(mood).
     viewModel { params ->

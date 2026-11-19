@@ -60,4 +60,5 @@ Cobertura atual:
 - validade de 24 horas do cache de recomendações, testada com relógio fixo;
 - seleção do trailer (somente YouTube do tipo "Trailer", com prioridade ao oficial);
 - validação da avaliação pessoal (1 a 5 estrelas);
-- cálculo do atraso até a próxima janela da notificação (19h às 21h), incluindo viradas de mês e de ano.
+- cálculo do atraso até a próxima janela da notificação (19h às 21h), incluindo viradas de mês e de ano;
+- casos de uso de recomendações, com repositórios falsos: uso do cache válido sem chamar a API, atualização com cache vazio ou expirado, pull-to-refresh, erro de rede quando offline e remoção imediata de filmes marcados como assistidos.

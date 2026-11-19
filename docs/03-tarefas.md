@@ -82,7 +82,7 @@
 - **Relacionado:** RN10 · CA29
 - **Commit:** `feat: calcula atraso ate a janela da notificacao`
 
-### [ ] T11 — Repositórios e casos de uso de recomendações
+### [x] T11 — Repositórios e casos de uso de recomendações
 - **Descrição:** interfaces `MovieRepository` e `SavedMovieRepository`; `GetMoodsUseCase`, `ObserveRecommendationsUseCase`, `RefreshRecommendationsUseCase`, `ObserveConnectivityUseCase`. Testes com repositórios e monitor falsos.
 - **Pronto quando:** testes cobrem cache válido (não chama API), expirado, `force`, offline (`Network`) e a remoção de assistidos em tempo real.
 - **Relacionado:** RF01, RF03–RF05, RF13 · CA04, CA06–CA08

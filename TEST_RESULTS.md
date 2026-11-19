@@ -7,6 +7,30 @@ Registro das execuções dos testes unitários (JVM). Cada entrada reflete uma e
 
 ---
 
+## 2026-11-19 14:14 — T11: casos de uso de recomendações
+
+| Item | Valor |
+|---|---|
+| Comando | `./gradlew testDebugUnitTest` |
+| Total | 63 |
+| Aprovados | 63 |
+| Falhas | 0 |
+| Ignorados | 0 |
+| Correções aplicadas | Nenhuma |
+
+**Classes novas** (com repositórios e monitor de conexão falsos):
+
+| Classe de teste | Testes | Cobre |
+|---|---|---|
+| `GetMoodsUseCaseTest` | 1 | Os 8 humores na ordem da tela (RF01) |
+| `ObserveRecommendationsUseCaseTest` | 5 | Cache com data; sem cache; regras aplicadas; filme some ao ser marcado como assistido, em tempo real (RN03, CA04); filme só salvo continua |
+| `RefreshRecommendationsUseCaseTest` | 9 | Cache válido não chama a API (CA06); expirado e vazio chamam (CA07); `force` ignora a validade (CA08); offline devolve `Network` sem chamar a API; offline com cache válido; `force` offline; falha da API repassada; critérios do humor |
+| `ObserveConnectivityUseCaseTest` | 1 | Emissões online → offline → online (RF13) |
+
+As classes anteriores foram executadas novamente, sem falhas.
+
+---
+
 ## 2026-11-19 14:11 — T10: janela da notificação
 
 | Item | Valor |
